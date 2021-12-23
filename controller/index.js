@@ -8,6 +8,17 @@ layer between our Express application and our MySQL database.
 The information taken from the example postman would be the email, 
 name of person, and phone number right?
 */
+
+const getAllContacts = (request, response) => {
+return response.status(200).send('This was successful')
+}
+
+const getContactById = () => {
+}
+const uploadContacts = () => {
+}
+const uploadCSVFile = () => {
+}
 const createNewPerson = async (request, response) => {
     try {
         const { firstKey, secondKey, etcKey } = request.body
@@ -25,5 +36,9 @@ const createNewPerson = async (request, response) => {
 }
 
 module.exports = {
-    createNewPerson
+    createNewPerson,
+    getAllContacts,
+    getContactById,
+    uploadContacts,
+    uploadCSVFile
 }
