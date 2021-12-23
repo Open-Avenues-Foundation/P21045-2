@@ -3,6 +3,14 @@ const express = require('express')
 
 const app = express()
 
+app,get('/api/contacts', getAllContacts)
+
+app.get('/api/contacts/:id', getContactById)
+
+app.post('/api/contacts', uploadCSVFile)
+
+app.post('/api/contacts', uploadContacts)
+
 app.all('*', (request, response) => {
   response.sendStatus(404)
 })
