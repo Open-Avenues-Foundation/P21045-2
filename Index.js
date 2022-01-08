@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 const express = require('express')
-const { createNewPerson, getAllContacts, getContactById, uploadCSVFile, uploadContacts } =  require('./controller')
+const {
+  createNewPerson, getAllContacts, getContactById, uploadCSVFile, uploadContacts
+} = require('./controller')
 
 const app = express()
 
@@ -16,6 +18,6 @@ app.all('*', (request, response) => {
   response.sendStatus(404)
 })
 
-app.listen(1337, () => {
-  console.log('Listening on http://localhost:1337...')
+app.listen(1336, () => {
+  console.log('Listening on http://localhost:1336...')
 })

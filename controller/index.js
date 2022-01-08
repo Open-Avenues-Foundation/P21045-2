@@ -10,7 +10,7 @@ name of person, and phone number right?
 */
 
 const getAllContacts = (request, response) => {
-return response.status(200).send('This was successful')
+  return response.status(200).send('This was successful')
 }
 
 const getContactById = () => {
@@ -20,25 +20,25 @@ const uploadContacts = () => {
 const uploadCSVFile = () => {
 }
 const createNewPerson = async (request, response) => {
-    try {
-        const { firstKey, secondKey, etcKey } = request.body
-        
-        if (!firstKey || !secondKey || !etcKey) {
-            return response.status(400).send('Missong one of the following: firstKey, secondKey, etc')
-        }
+  try {
+    const { firstKey, secondKey, etcKey } = request.body
 
-        const newPerson = await models.People.create ({ firstKey, secondKey, etcKey })
-
-        return response.status(201).send(newPerson)
-    } catch (error) {
-        return response.status(500).send('Unknown error while creating new person')
+    if (!firstKey || !secondKey || !etcKey) {
+      return response.status(400).send('Missing one of the following: firstKey, secondKey, etc')
     }
+
+    const newPerson = await models.People.create({ firstKey, secondKey, etcKey })
+
+    return response.status(201).send(newPerson)
+  } catch (error) {
+    return response.status(500).send('Unknown error while creating new person')
+  }
 }
 
 module.exports = {
-    createNewPerson,
-    getAllContacts,
-    getContactById,
-    uploadContacts,
-    uploadCSVFile
+  createNewPerson,
+  getAllContacts,
+  getContactById,
+  uploadContacts,
+  uploadCSVFile
 }
