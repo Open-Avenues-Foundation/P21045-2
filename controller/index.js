@@ -16,6 +16,8 @@ const getAllContacts = async (request, response) => {
     return response.status(200).send(getAllContacts)
   } catch (e) {
     console.log(e) // eslint-disable-line no-console
+
+    return response.status(500).send('Error trying to retrieve contact list, please try again')
   }
 }
 
@@ -34,10 +36,13 @@ const getContactByIdentifier = async (request, response) => {
     return response.status(500).send('Error trying to retrieve contact, please try again')
   }
 }
+
 const uploadContacts = () => {
 }
+
 const uploadCSVFile = () => {
 }
+
 const createNewPerson = async (request, response) => {
   try {
     const { firstKey, secondKey, etcKey } = request.body
