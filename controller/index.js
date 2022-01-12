@@ -9,11 +9,30 @@ The information taken from the example postman would be the email,
 name of person, and phone number right?
 */
 
-const getAllContacts = (request, response) => {
-  return response.status(200).send('This was successful')
+const getAllContacts = async (request, response) => {
+  try {
+    const getAllContacts = await models.PLACEHOLDER.findAll()
+
+    return response.status(200).send(getAllContacts)
+  } catch (e) {
+    console.log(e) // eslint-disable-line no-console
+  }
 }
 
-const getContactById = () => {
+const getContactByIdentifier = async (request, response) => {
+  try {
+    const { identifier } = request.params
+
+    const getContactByIdentifier = await models.PLACEHOLDER.findOne({
+      where: { id: { [models.Op.like]: `%${identifier}%` } }
+    })
+
+    return getContactByIdentifier
+      ? response.send(getContactByIdentifier)
+      : response.status(404).send('No contact found, please try again')
+  } catch (e) {
+    return response.status(500).send('Error trying to retrieve contact, please try again')
+  }
 }
 const uploadContacts = () => {
 }
@@ -35,10 +54,15 @@ const createNewPerson = async (request, response) => {
   }
 }
 
+const sendTextMessage = async (request, response) => {
+
+}
+
 module.exports = {
   createNewPerson,
   getAllContacts,
-  getContactById,
+  getContactByIdentifier,
   uploadContacts,
-  uploadCSVFile
+  uploadCSVFile,
+  sendTextMessage
 }
