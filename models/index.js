@@ -13,7 +13,6 @@ const connection = new Sequelize(config.database, config.username, config.passwo
 const textMessage = textMessageModel(connection, Sequelize)
 const contacts = contactsModel(connection, Sequelize)
 
-
 module.exports = {
   textMessage,
   contacts,
