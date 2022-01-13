@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const express = require('express')
-var contactsRouter = require('./routes/contacts.routes')
-var textMessageRouter = require('./routes/textMessage.routes')
+const contactsRouter = require('./routes/contacts.routes')
+const textMessageRouter = require('./routes/textMessage.routes')
 
 const app = express()
 
