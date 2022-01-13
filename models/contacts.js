@@ -1,4 +1,4 @@
-const Customers = (connection, Sequelize) => {
+const Contacts = (connection, Sequelize) => {
   return connection.define('testTables', {
     id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
     Email: { type: Sequelize.STRING, allowNull: false },
@@ -12,4 +12,4 @@ const Customers = (connection, Sequelize) => {
   }, { paranoid: true })
 }
 
-module.exports = Customers
+module.exports = Contacts

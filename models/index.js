@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const allConfigs = require('../configs/sequelize')
 const textMessageModel = require('./textMessage')
-const contactsModel = require('./')
+const contactsModel = require('./contacts')
 
 const environment = process.env.NODE_ENV || 'development'
 const config = allConfigs[environment]
@@ -11,10 +11,10 @@ const connection = new Sequelize(config.database, config.username, config.passwo
 })
 
 const textMessage = textMessageModel(connection, Sequelize)
-const contacts = contactsModel(connection, Sequelize)
+const Contacts = contactsModel(connection, Sequelize)
 
 module.exports = {
   textMessage,
-  contacts,
+  Contacts,
   Op: Sequelize.Op
 }
