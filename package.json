@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js",
+    "dev": "./node_modules/.bin/env-cmd nodemon index.js",
+    "dev:migrate": "./node_modules/.bin/env-cmd ./node_modules/.bin/sequelize db:migrate --env development --config ./configs/sequelize.js",
     "lint": "npm run lint:eslint",
     "lint:eslint": "./node_modules/.bin/eslint --fix --format codeframe ."
   },
@@ -27,6 +28,7 @@
     "sequelize-cli": "^6.3.0"
   },
   "devDependencies": {
+    "env-cmd": "^10.1.0",
     "eslint": "^8.4.1",
     "nodemon": "^2.0.15"
   }

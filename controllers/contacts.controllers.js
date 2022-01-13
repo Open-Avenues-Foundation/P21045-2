@@ -11,7 +11,7 @@ name of person, and phone number right?
 
 const getAllContacts = async (request, response) => {
   try {
-    const getAllContacts = await models.PLACEHOLDER.findAll()
+    const getAllContacts = await models.contacts.findAll()
 
     return response.status(200).send(getAllContacts)
   } catch (e) {
@@ -21,16 +21,16 @@ const getAllContacts = async (request, response) => {
   }
 }
 
-const getContactByIdentifier = async (request, response) => {
+const getContactById = async (request, response) => {
   try {
-    const { identifier } = request.params
+    const { id } = request.params
 
-    const getContactByIdentifier = await models.PLACEHOLDER.findOne({
-      where: { id: { [models.Op.like]: `%${identifier}%` } }
+    const getContactById = await models.contacts.findOne({
+      where: { id: { [models.Op.like]: `%${id}%` } }
     })
 
-    return getContactByIdentifier
-      ? response.send(getContactByIdentifier)
+    return getContactById
+      ? response.send(getContactById)
       : response.status(404).send('No contact found, please try again')
   } catch (e) {
     return response.status(500).send('Error trying to retrieve contact, please try again')
@@ -51,7 +51,7 @@ const createNewPerson = async (request, response) => {
       return response.status(400).send('Missing one of the following: firstKey, secondKey, etc')
     }
 
-    const newPerson = await models.People.create({ firstKey, secondKey, etcKey })
+    const newPerson = await models.contacts.create({ firstKey, secondKey, etcKey })
 
     return response.status(201).send(newPerson)
   } catch (error) {
@@ -59,15 +59,10 @@ const createNewPerson = async (request, response) => {
   }
 }
 
-const sendTextMessage = async (request, response) => {
-
-}
-
 module.exports = {
   createNewPerson,
   getAllContacts,
-  getContactByIdentifier,
+  getContactById,
   uploadContacts,
-  uploadCSVFile,
-  sendTextMessage
+  uploadCSVFile
 }
