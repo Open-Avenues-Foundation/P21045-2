@@ -11,7 +11,7 @@ name of person, and phone number right?
 
 const getAllContacts = async (request, response) => {
   try {
-    const getAllContacts = await models.contacts.findAll()
+    const getAllContacts = await models.Contacts.findAll()
 
     return response.status(200).send(getAllContacts)
   } catch (e) {
@@ -25,7 +25,7 @@ const getContactById = async (request, response) => {
   try {
     const { id } = request.params
 
-    const getContactById = await models.contacts.findOne({
+    const getContactById = await models.Contacts.findOne({
       where: { id: { [models.Op.like]: `%${id}%` } }
     })
 
@@ -51,7 +51,7 @@ const createNewPerson = async (request, response) => {
       return response.status(400).send('Missing one of the following: firstKey, secondKey, etc')
     }
 
-    const newPerson = await models.contacts.create({ firstKey, secondKey, etcKey })
+    const newPerson = await models.Contacts.create({ firstKey, secondKey, etcKey })
 
     return response.status(201).send(newPerson)
   } catch (error) {
