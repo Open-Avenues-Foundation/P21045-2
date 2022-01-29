@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const allConfigs = require('../configs/sequelize')
+const allConfigs = require('../config/sequelize')
 const textMessagesModel = require('./textMessages')
 const contactsModel = require('./contacts')
 const textCampaignsModel = require('./textCampaigns')
