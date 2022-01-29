@@ -8,14 +8,14 @@ module.exports = {
      */
     await queryInterface.createTable('contacts', {
       id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-      First_Name: { type: Sequelize.STRING, allowNull: false },
-      Last_Name: { type: Sequelize.STRING, allowNull: false },
-      Email: { type: Sequelize.STRING, allowNull: false },
-      City: { type: Sequelize.STRING, allowNull: false },
-      State: { type: Sequelize.STRING, allowNull: false },
-      Phone_number: { type: Sequelize.INTEGER, allowNull: false },
-      Last_Order_Price: { type: Sequelize.INTEGER, allowNull: false },
-      Last_Order_Date: { type: Sequelize.DATE, allowNull: false },
+      email: { type: Sequelize.STRING, allowNull: false },
+      firstName: { type: Sequelize.STRING, allowNull: false },
+      lastName: { type: Sequelize.STRING, allowNull: false },
+      phoneNumber: { type: Sequelize.INTEGER, allowNull: false },
+      city: { type: Sequelize.STRING, allowNull: false },
+      state: { type: Sequelize.STRING, allowNull: false },
+      lastOrderPrice: { type: Sequelize.INTEGER, allowNull: false },
+      lastOrderDate: { type: Sequelize.DATE, allowNull: false },
       createdAt: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
       updatedAt: {
         type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
@@ -25,10 +25,10 @@ module.exports = {
 
     await queryInterface.createTable('textCampaigns', {
       id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-      Message: { type: Sequelize.STRING, allowNull: false },
-      Name: { type: Sequelize.STRING, allowNull: false },
-      Time_Initiated: { type: Sequelize.DATE, allowNull: false },
-      Status: { type: Sequelize.TINYINT, allowNull: false },
+      message: { type: Sequelize.STRING, allowNull: false },
+      name: { type: Sequelize.STRING, allowNull: false },
+      timeInitiated: { type: Sequelize.DATE, allowNull: false },
+      status: { type: Sequelize.TINYINT, allowNull: false },
       createdAt: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
       updatedAt: {
         type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
@@ -40,8 +40,8 @@ module.exports = {
       id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
       contactId: { type: Sequelize.INTEGER, references: { model: 'contacts', key: 'id' } },
       textCampaignId: { type: Sequelize.INTEGER, references: { model: 'textCampaigns', key: 'id' } },
-      Time_Sent: { type: Sequelize.DATE, allowNull: false },
-      Status: { type: Sequelize.TINYINT, allowNull: false },
+      timeSent: { type: Sequelize.DATE, allowNull: false },
+      status: { type: Sequelize.TINYINT, allowNull: false },
       createdAt: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
       updatedAt: {
         type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
