@@ -8,7 +8,7 @@ const getAllContacts = async (request, response) => {
 
     return response.status(200).send(getAllContacts)
   } catch (e) {
-    console.log(e) // eslint-disable-line no-console
+    console.log(e)
 
     return response.status(500).send('Error trying to retrieve contact list, please try again')
   }
@@ -77,7 +77,22 @@ const updateContact = async (request, response) => {
   }
 }
 
-const deleteContact = () => {
+const deleteContact = async (request, response) => {
+  try {
+    const { id } = request.params
+
+    const contact = await models.Contacts.findOne({ where: { id } })
+
+    if (!contact) return response.send(`Unable to find the contact with id: ${id} to delete`)
+
+    await contact.destroy()
+
+    return response.status(200).send('Contact has been successfully deleted')
+  } catch (e) {
+    console.log(e)
+
+    return response.status(500).send('Error while deleting new contact')
+  }
 }
 
 const uploadCSVFile = () => {
