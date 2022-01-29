@@ -6,9 +6,11 @@ const textCampaignRouter = require('./routes/textCampaignRoutes')
 
 const app = express()
 
-app.use('api/contact', contactsRouter)
-app.use('api/text', textMessageRouter)
-app.use('api/campaign', textCampaignRouter)
+app.use(express.json())
+
+app.use('/api/contact', contactsRouter)
+app.use('/api/text', textMessageRouter)
+app.use('/api/campaign', textCampaignRouter)
 
 
 app.all('*', (request, response) => {
