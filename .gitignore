@@ -1,3 +1,4 @@
 node_modules
 .env
 CSV-customers.xlsx
+CSV-customers.csv
