@@ -18,7 +18,7 @@ const getContactById = async (request, response) => {
   try {
     const { id } = request.params
 
-    const getContactById = await models.Contacts.findAll({
+    const getContactById = await models.Contacts.findOne({
       where: { id }
     })
 
@@ -73,7 +73,7 @@ const updateContact = async (request, response) => {
   } catch (e) {
     console.log(e)
 
-    response.status(500).send('Error while updating new contact')
+    response.status(500).send('Error while updating contact')
   }
 }
 
@@ -91,7 +91,7 @@ const deleteContact = async (request, response) => {
   } catch (e) {
     console.log(e)
 
-    return response.status(500).send('Error while deleting new contact')
+    return response.status(500).send('Error while deleting contact')
   }
 }
 
