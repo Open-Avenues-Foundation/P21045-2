@@ -1,12 +1,15 @@
 /* eslint-disable no-console */
 const express = require('express')
-const contactsRouter = require('./routes/contacts.routes')
-const textMessageRouter = require('./routes/textMessage.routes')
+const contactsRouter = require('./routes/contactsRoutes')
+const textMessageRouter = require('./routes/textMessageRoutes')
+const textCampaignRouter = require('./routes/textCampaignRoutes')
 
 const app = express()
 
 app.use('api/contact', contactsRouter)
-app.use('api/text-message', textMessageRouter)
+app.use('api/text', textMessageRouter)
+app.use('api/campaign', textCampaignRouter)
+
 
 app.all('*', (request, response) => {
   response.sendStatus(404)

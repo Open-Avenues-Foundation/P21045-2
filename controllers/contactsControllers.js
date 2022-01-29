@@ -37,9 +37,6 @@ const getContactById = async (request, response) => {
   }
 }
 
-const uploadContacts = () => {
-}
-
 const uploadCSVFile = () => {
 }
 
@@ -63,6 +60,5 @@ module.exports = {
   createNewPerson,
   getAllContacts,
   getContactById,
-  uploadContacts,
   uploadCSVFile
 }
