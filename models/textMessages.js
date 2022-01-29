@@ -3,8 +3,8 @@ const TextMessages = (connection, Sequelize, Contacts, TextCampaigns) => {
     id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
     contactId: { type: Sequelize.INTEGER, references: { model: Contacts, key: 'id' } },
     textCampaignId: { type: Sequelize.INTEGER, references: { model: TextCampaigns, key: 'id' } },
-    Time_Sent: { type: Sequelize.DATE, allowNull: false },
-    Status: { type: Sequelize.TINYINT, allowNull: false }
+    timeSent: { type: Sequelize.DATE, allowNull: false },
+    status: { type: Sequelize.TINYINT, allowNull: false }
   }, { paranoid: true })
 }
 

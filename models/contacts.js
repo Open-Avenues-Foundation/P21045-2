@@ -1,14 +1,14 @@
 const Contacts = (connection, Sequelize) => {
   return connection.define('contacts', {
     id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-    Email: { type: Sequelize.STRING, allowNull: false },
-    First_Name: { type: Sequelize.STRING, allowNull: false },
-    Last_Name: { type: Sequelize.STRING, allowNull: false },
-    Phone_number: { type: Sequelize.INTEGER, allowNull: false },
-    City: { type: Sequelize.STRING, allowNull: false },
-    State: { type: Sequelize.STRING, allowNull: false },
-    Last_Order_Price: { type: Sequelize.INTEGER, allowNull: false },
-    Last_Order_Date: { type: Sequelize.DATE, allowNull: false }
+    email: { type: Sequelize.STRING, allowNull: false },
+    firstName: { type: Sequelize.STRING, allowNull: false },
+    lastName: { type: Sequelize.STRING, allowNull: false },
+    phoneNumber: { type: Sequelize.INTEGER, allowNull: false },
+    city: { type: Sequelize.STRING, allowNull: false },
+    state: { type: Sequelize.STRING, allowNull: false },
+    lastOrderPrice: { type: Sequelize.INTEGER, allowNull: false },
+    lastOrderDate: { type: Sequelize.DATE, allowNull: false }
   }, { paranoid: true })
 }
 
