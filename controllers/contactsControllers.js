@@ -1,13 +1,4 @@
 const models = require('../models')
-/*
-Models are responsible for the storage and 
-retrieval of data in our applications. 
-For us, models will serve as the interface 
-layer between our Express application and our MySQL database.
-
-The information taken from the example postman would be the email, 
-name of person, and phone number right?
-*/
 
 const getAllContacts = async (request, response) => {
   try {
@@ -37,9 +28,6 @@ const getContactById = async (request, response) => {
   }
 }
 
-const uploadCSVFile = () => {
-}
-
 const createNewPerson = async (request, response) => {
   try {
     const { firstKey, secondKey, etcKey } = request.body
@@ -56,9 +44,20 @@ const createNewPerson = async (request, response) => {
   }
 }
 
+const updateContact = () => {
+}
+
+const deleteContact = () => {
+}
+
+const uploadCSVFile = () => {
+}
+
 module.exports = {
   createNewPerson,
   getAllContacts,
   getContactById,
+  updateContact,
+  deleteContact,
   uploadCSVFile
 }
