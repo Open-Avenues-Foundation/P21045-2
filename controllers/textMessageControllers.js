@@ -91,20 +91,29 @@ const deleteText = async (request, response) => {
 
 const sendTextMessage = async (request, response) => {
   try {
-    const { body, from, to } = request.body
+    const { id } = request.body
 
-    if (!body || !from || !to) {
-      return response.status(400).send('Missing one of the following: body, from, to')
+    if (!id) {
+      return response.status(400).send('Missing the text id')
     }
+
+    const text = await models.TextMessages.findOne({ where: { id } })
+
+    if (!text) {
+      return response.status(400).send(`Unable to find text with id: ${id}`)
+    }
+
+    const campaign = await models.TextCampaigns.findOne({ where: { id: text.textCampaignId } })
+    const contact = await models.Contacts.findOne({ where: { id: text.contactId } })
 
     const accountSid = process.env.TWILIO_ACCOUNT_SID
     const authToken = process.env.TWILIO_AUTH_TOKEN
     const client = require('twilio')(accountSid, authToken)
 
     await client.messages.create({
-      body: body,
-      from: from,
-      to: to
+      body: campaign.message,
+      from: +17853846086,
+      to: contact.phoneNumber
     }).then(message => console.log(message))
 
     return response.status(200).send('Text message has been successfully sent')
@@ -113,6 +122,10 @@ const sendTextMessage = async (request, response) => {
 
     return response.status(500).send('Error while sending text message')
   }
+
+  // Want it to take in text id and then with that id it can find the campaign id to determine the content and then use the
+  // contact id to find the phone number needed and then the from will remain the same
+  // update the time sent for text message
 }
 
 module.exports = {
