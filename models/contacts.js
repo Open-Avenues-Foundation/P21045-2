@@ -8,7 +8,7 @@ const Contacts = (connection, Sequelize) => {
     city: { type: Sequelize.STRING, allowNull: false },
     state: { type: Sequelize.STRING, allowNull: false },
     lastOrderPrice: { type: Sequelize.INTEGER, allowNull: false },
-    lastOrderDate: { type: Sequelize.DATE, allowNull: false }
+    lastOrderDate: { type: Sequelize.DATEONLY, allowNull: false }
   }, { paranoid: true })
 }
 
