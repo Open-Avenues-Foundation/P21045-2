@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+const { message } = require('statuses')
 const models = require('../models')
 
 const addText = async (request, response) => {
@@ -94,13 +95,13 @@ const sendTextMessage = async (request, response) => {
     const { id } = request.body
 
     if (!id) {
-      return response.status(400).send('Missing the text id')
+      return response.status(400).send('Missing the id field')
     }
 
     const text = await models.TextMessages.findOne({ where: { id } })
 
     if (!text) {
-      return response.status(400).send(`Unable to find text with id: ${id}`)
+      return response.status(400).send(`Unable to find a text with id: ${id}`)
     }
 
     const campaign = await models.TextCampaigns.findOne({ where: { id: text.textCampaignId } })
@@ -110,11 +111,13 @@ const sendTextMessage = async (request, response) => {
     const authToken = process.env.TWILIO_AUTH_TOKEN
     const client = require('twilio')(accountSid, authToken)
 
-    await client.messages.create({
+    const sendingMessage = await client.messages.create({
       body: campaign.message,
       from: +17853846086,
       to: contact.phoneNumber
-    }).then(message => console.log(message))
+    })
+
+    text.update({ timeSent: sendingMessage.dateCreated })
 
     return response.status(200).send('Text message has been successfully sent')
   } catch (e) {
@@ -122,10 +125,6 @@ const sendTextMessage = async (request, response) => {
 
     return response.status(500).send('Error while sending text message')
   }
-
-  // Want it to take in text id and then with that id it can find the campaign id to determine the content and then use the
-  // contact id to find the phone number needed and then the from will remain the same
-  // update the time sent for text message
 }
 
 module.exports = {
