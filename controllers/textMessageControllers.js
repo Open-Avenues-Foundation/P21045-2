@@ -59,6 +59,8 @@ const updateText = async (request, response) => {
 
     const textMessage = await models.TextMessages.findOne({ where: { id } })
 
+    if (!textMessage) return response.status(400).send(`Unable to find the text message with id: ${id} to update`)
+
     await textMessage.update({ contactId, textCampaignId, timeSent, status })
 
     return response.status(201).send('The text message has been successfully updated')
@@ -75,7 +77,7 @@ const deleteText = async (request, response) => {
 
     const textMessage = await models.TextMessages.findOne({ where: { id } })
 
-    if (!textMessage) return response.send(`Unable to find the text message with id: ${id} to delete`)
+    if (!textMessage) return response.status(400).send(`Unable to find the text message with id: ${id} to delete`)
 
     await textMessage.destroy()
 

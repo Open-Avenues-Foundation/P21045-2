@@ -65,6 +65,8 @@ const updateContact = async (request, response) => {
 
     const contact = await models.Contacts.findOne({ where: { id } })
 
+    if (!contact) return response.status(400).send(`Unable to find the contact with id: ${id} to update`)
+
     await contact.update({
       firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOrderDate
     })
@@ -83,7 +85,7 @@ const deleteContact = async (request, response) => {
 
     const contact = await models.Contacts.findOne({ where: { id } })
 
-    if (!contact) return response.send(`Unable to find the contact with id: ${id} to delete`)
+    if (!contact) return response.status(400).send(`Unable to find the contact with id: ${id} to delete`)
 
     await contact.destroy()
 
