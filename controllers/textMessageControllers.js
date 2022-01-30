@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+const { message } = require('statuses')
 const models = require('../models')
 
 const addText = async (request, response) => {
@@ -91,21 +92,32 @@ const deleteText = async (request, response) => {
 
 const sendTextMessage = async (request, response) => {
   try {
-    const { body, from, to } = request.body
+    const { id } = request.body
 
-    if (!body || !from || !to) {
-      return response.status(400).send('Missing one of the following: body, from, to')
+    if (!id) {
+      return response.status(400).send('Missing the id field')
     }
+
+    const text = await models.TextMessages.findOne({ where: { id } })
+
+    if (!text) {
+      return response.status(400).send(`Unable to find a text with id: ${id}`)
+    }
+
+    const campaign = await models.TextCampaigns.findOne({ where: { id: text.textCampaignId } })
+    const contact = await models.Contacts.findOne({ where: { id: text.contactId } })
 
     const accountSid = process.env.TWILIO_ACCOUNT_SID
     const authToken = process.env.TWILIO_AUTH_TOKEN
     const client = require('twilio')(accountSid, authToken)
 
-    await client.messages.create({
-      body: body,
-      from: from,
-      to: to
-    }).then(message => console.log(message))
+    const sendingMessage = await client.messages.create({
+      body: campaign.message,
+      from: +17853846086,
+      to: contact.phoneNumber
+    })
+
+    text.update({ timeSent: sendingMessage.dateCreated })
 
     return response.status(200).send('Text message has been successfully sent')
   } catch (e) {
