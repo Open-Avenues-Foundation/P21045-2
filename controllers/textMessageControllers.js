@@ -89,8 +89,30 @@ const deleteText = async (request, response) => {
   }
 }
 
-const sendTextMessage = (request, response) => {
-  response.send('To Do')
+const sendTextMessage = async (request, response) => {
+  try {
+    const { body, from, to } = request.body
+
+    if (!body || !from || !to) {
+      return response.status(400).send('Missing one of the following: body, from, to')
+    }
+
+    const accountSid = process.env.TWILIO_ACCOUNT_SID
+    const authToken = process.env.TWILIO_AUTH_TOKEN
+    const client = require('twilio')(accountSid, authToken)
+
+    await client.messages.create({
+      body: body,
+      from: from,
+      to: to
+    }).then(message => console.log(message))
+
+    return response.status(200).send('Text message has been successfully sent')
+  } catch (e) {
+    console.log(e)
+
+    return response.status(500).send('Error while sending text message')
+  }
 }
 
 module.exports = {
