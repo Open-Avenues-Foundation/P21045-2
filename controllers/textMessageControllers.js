@@ -89,7 +89,8 @@ const deleteText = async (request, response) => {
   }
 }
 
-const sendTextMessage = async () => {
+const sendTextMessage = (request, response) => {
+  response.send('To Do')
 }
 
 module.exports = {
