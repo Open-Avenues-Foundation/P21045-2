@@ -4,7 +4,7 @@ const TextCampaigns = (connection, Sequelize) => {
     message: { type: Sequelize.STRING, allowNull: false },
     name: { type: Sequelize.STRING, allowNull: false },
     timeInitiated: { type: Sequelize.DATE, allowNull: false },
-    status: { type: Sequelize.TINYINT, allowNull: false }
+    status: { type: Sequelize.BOOLEAN, allowNull: false }
   }, { paranoid: true })
 }
 
