@@ -26,3 +26,4 @@ module.exports = {
   TextMessages,
   Op: Sequelize.Op
 }
+

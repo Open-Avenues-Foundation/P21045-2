@@ -1,13 +1,6 @@
+/* eslint-disable no-console */
+/* eslint-disable max-len */
 const models = require('../models')
-/*
-Models are responsible for the storage and 
-retrieval of data in our applications. 
-For us, models will serve as the interface 
-layer between our Express application and our MySQL database.
-
-The information taken from the example postman would be the email, 
-name of person, and phone number right?
-*/
 
 const getAllContacts = async (request, response) => {
   try {
@@ -15,7 +8,7 @@ const getAllContacts = async (request, response) => {
 
     return response.status(200).send(getAllContacts)
   } catch (e) {
-    console.log(e) // eslint-disable-line no-console
+    console.log(e)
 
     return response.status(500).send('Error trying to retrieve contact list, please try again')
   }
@@ -26,7 +19,7 @@ const getContactById = async (request, response) => {
     const { id } = request.params
 
     const getContactById = await models.Contacts.findOne({
-      where: { id: { [models.Op.like]: `%${id}%` } }
+      where: { id }
     })
 
     return getContactById
@@ -37,28 +30,81 @@ const getContactById = async (request, response) => {
   }
 }
 
-const uploadCSVFile = () => {
-}
-
 const createNewPerson = async (request, response) => {
   try {
-    const { firstKey, secondKey, etcKey } = request.body
+    const {
+      firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOrderDate
+    } = request.body
 
-    if (!firstKey || !secondKey || !etcKey) {
-      return response.status(400).send('Missing one of the following: firstKey, secondKey, etc')
+    if (!firstName || !lastName || !email || !city || !state || !phoneNumber || !lastOrderPrice || !lastOrderDate) {
+      return response.status(400).send('Missing one of the following: firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOderDate')
     }
 
-    const newPerson = await models.Contacts.create({ firstKey, secondKey, etcKey })
+    const newPerson = await models.Contacts.create({
+      firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOrderDate
+    })
 
     return response.status(201).send(newPerson)
-  } catch (error) {
-    return response.status(500).send('Unknown error while creating new person')
+  } catch (e) {
+    console.log(e)
+
+    return response.status(500).send('Error while creating new contact')
   }
+}
+
+const updateContact = async (request, response) => {
+  try {
+    const {
+      firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOrderDate
+    } = request.body
+    const { id } = request.params
+
+    if (!id || !firstName || !lastName || !email || !city || !state || !phoneNumber || !lastOrderPrice || !lastOrderDate) {
+      return response.status(400).send('Missing one of the following: id, firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOderDate')
+    }
+
+    const contact = await models.Contacts.findOne({ where: { id } })
+
+    if (!contact) return response.status(400).send(`Unable to find the contact with id: ${id} to update`)
+
+    await contact.update({
+      firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOrderDate
+    })
+
+    return response.status(201).send('The contact has been successfully updated')
+  } catch (e) {
+    console.log(e)
+
+    response.status(500).send('Error while updating contact')
+  }
+}
+
+const deleteContact = async (request, response) => {
+  try {
+    const { id } = request.params
+
+    const contact = await models.Contacts.findOne({ where: { id } })
+
+    if (!contact) return response.status(400).send(`Unable to find the contact with id: ${id} to delete`)
+
+    await contact.destroy()
+
+    return response.status(200).send('Contact has been successfully deleted')
+  } catch (e) {
+    console.log(e)
+
+    return response.status(500).send('Error while deleting contact')
+  }
+}
+
+const uploadCSVFile = () => {
 }
 
 module.exports = {
   createNewPerson,
   getAllContacts,
   getContactById,
+  updateContact,
+  deleteContact,
   uploadCSVFile
 }
