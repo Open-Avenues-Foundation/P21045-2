@@ -89,7 +89,8 @@ const deleteCampaign = async (request, response) => {
   }
 }
 
-const startCampaign = () => {
+const startCampaign = (request, response) => {
+  response.send('To Do')
 }
 
 module.exports = {
