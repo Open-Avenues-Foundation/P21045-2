@@ -89,8 +89,45 @@ const deleteCampaign = async (request, response) => {
   }
 }
 
-const startCampaign = (request, response) => {
-  response.send('To Do')
+const startCampaign = async (request, response) => {
+  try {
+    const { id } = request.params
+    const campaign = await models.TextCampaigns.findOne({ where: { id } })
+
+    if (!campaign) {
+      return response.status(400).send(`Unable to find a campaign with id: ${id}`)
+    }
+
+    const allTexts = await models.TextMessages.findAll({ where: { textCampaignId: id } })
+
+    const textIds = allTexts.map((arr) => arr.id)
+
+    for (let i = 0; i < textIds.length; i++) {
+      const id = textIds[i]
+
+      const text = await models.TextMessages.findOne({ where: { id } })
+      const campaign = await models.TextCampaigns.findOne({ where: { id: text.textCampaignId } })
+      const contact = await models.Contacts.findOne({ where: { id: text.contactId } })
+
+      const accountSid = process.env.TWILIO_ACCOUNT_SID
+      const authToken = process.env.TWILIO_AUTH_TOKEN
+      const client = require('twilio')(accountSid, authToken)
+
+      const sendingMessage = await client.messages.create({
+        body: campaign.message,
+        from: +17853846086,
+        to: contact.phoneNumber
+      })
+
+      text.update({ timeSent: sendingMessage.dateCreated })
+    }
+
+    return response.status(200).send('Campaign has been successfully sent')
+  } catch (e) {
+    console.log(e)
+
+    return response.status(500).send('Error while sending campaign')
+  }
 }
 
 module.exports = {

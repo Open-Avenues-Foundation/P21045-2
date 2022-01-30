@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-const { message } = require('statuses')
 const models = require('../models')
 
 const addText = async (request, response) => {
