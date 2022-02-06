@@ -10,8 +10,8 @@ module.exports = {
       {
         email: 'enlightenedone@paikhuuok.com',
         firstName: 'Frank',
-        lastName: 'Farrow',
-        phoneNumber: '(202)-555-0140',
+        lastName: 'Bethrico',
+        phoneNumber: '(774) 287-2697',
         city: 'Detroit',
         state: 'MI',
         lastOrderPrice: 26,
@@ -19,9 +19,9 @@ module.exports = {
       },
       {
         email: 'willstclair@pickuplanet.com',
-        firstName: 'Avneet',
-        lastName: 'Hancock',
-        phoneNumber: '(510)-555-0141',
+        firstName: 'James',
+        lastName: 'Olson',
+        phoneNumber: '(978)-652-8789',
         city: 'Plano',
         state: 'TX',
         lastOrderPrice: 62.99,
@@ -29,19 +29,19 @@ module.exports = {
       },
       {
         email: 'jmarkovitch@songshnagu.com',
-        firstName: 'Kester',
-        lastName: 'Mcdermott',
-        phoneNumber: '(657)-555-0184',
+        firstName: 'Catrina',
+        lastName: 'Bethrico',
+        phoneNumber: '(508)-826-4708',
         city: 'Denver',
         state: 'CO',
         lastOrderPrice: 10,
         lastOrderDate: '2021-09-11'
       },
       {
-        email: 'hellomedina@manlk.site',
-        firstName: 'Anthony',
-        lastName: 'Allison',
-        phoneNumber: '(909)-555-0171',
+        email: 'toygame123@gmail.com',
+        firstName: 'Ikponmwosa',
+        lastName: 'Otasowie',
+        phoneNumber: '(203)-565-3594',
         city: 'Milwaukee',
         state: 'WI',
         lastOrderPrice: 55,
@@ -51,15 +51,15 @@ module.exports = {
 
     await queryInterface.bulkInsert('textCampaigns', [
       { message: 'This is the first message', name: 'first message', timeInitiated: '2019-05-05', status: 'Pending' },
-      { message: 'This is the second message', name: 'second message', timeInitiated: '2020-06-06', status: 'Sent' },
+      { message: 'This is the second message', name: 'second message', timeInitiated: '2020-06-06', status: 'Pending' },
       { message: 'This is the third message', name: 'third message', timeInitiated: '2021-07-07', status: 'Pending' },
-      { message: 'This is the fourth message', name: 'fourth message', timeInitiated: '2022-08-08', status: 'Sent' }
+      { message: 'This is the fourth message', name: 'fourth message', timeInitiated: '2022-08-08', status: 'Pending' }
     ])
 
     return queryInterface.bulkInsert('textMessages', [
-      { contactId: 1, textCampaignId: 1, timeSent: '2000-04-04 15:57:59.000', status: 'Sent' },
+      { contactId: 1, textCampaignId: 1, timeSent: '2000-04-04 15:57:59.000', status: 'Pending' },
       { contactId: 2, textCampaignId: 2, timeSent: '2001-04-04 15:57:59.000', status: 'Pending' },
-      { contactId: 3, textCampaignId: 3, timeSent: '2002-04-04 15:57:59.000', status: 'Sent' },
+      { contactId: 3, textCampaignId: 3, timeSent: '2002-04-04 15:57:59.000', status: 'Pending' },
       { contactId: 4, textCampaignId: 4, timeSent: '2003-04-04 15:57:59.000', status: 'Pending' }
     ])
   },
