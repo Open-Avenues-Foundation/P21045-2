@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const models = require('../models')
+const { twilioText } = require('../utils/utilities')
 
 const addCampaign = async (request, response) => {
   try {
@@ -104,31 +105,22 @@ const startCampaign = async (request, response) => {
 
     const allTexts = await models.TextMessages.findAll({ where: { textCampaignId: id } })
 
-    const textIds = allTexts.map((arr) => arr.id)
-
-    for (let i = 0; i < textIds.length; i++) {
-      const id = textIds[i]
-
-      const text = await models.TextMessages.findOne({ where: { id } })
-      const campaign = await models.TextCampaigns.findOne({ where: { id: text.textCampaignId } })
+    allTexts.forEach(async (text) => {
       const contact = await models.Contacts.findOne({ where: { id: text.contactId } })
 
-      const accountSid = process.env.TWILIO_ACCOUNT_SID
-      const authToken = process.env.TWILIO_AUTH_TOKEN
-      const client = require('twilio')(accountSid, authToken)
+      await twilioText(campaign.message, contact.phoneNumber, text)
 
-      const sendingMessage = await client.messages.create({
-        body: campaign.message,
-        from: +17853846086,
-        to: contact.phoneNumber
-      })
-
-      text.update({ timeSent: sendingMessage.dateCreated })
-    }
+      campaign.update({ timeInitiated: text.timeSent })
+      campaign.update({ status: 'Sent' })
+    })
 
     return response.status(200).send('Campaign has been successfully sent')
   } catch (e) {
     console.log(e)
+    const { id } = request.params
+    const campaign = await models.TextCampaigns.findOne({ where: { id } })
+
+    campaign.update({ status: 'Fail' })
 
     return response.status(500).send('Error while sending campaign')
   }

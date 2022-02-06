@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const models = require('../models')
+const { twilioText } = require('../utils/utilities')
 
 const addText = async (request, response) => {
   try {
@@ -106,21 +107,16 @@ const sendTextMessage = async (request, response) => {
     const campaign = await models.TextCampaigns.findOne({ where: { id: text.textCampaignId } })
     const contact = await models.Contacts.findOne({ where: { id: text.contactId } })
 
-    const accountSid = process.env.TWILIO_ACCOUNT_SID
-    const authToken = process.env.TWILIO_AUTH_TOKEN
-    const client = require('twilio')(accountSid, authToken)
 
-    const sendingMessage = await client.messages.create({
-      body: campaign.message,
-      from: +17853846086,
-      to: contact.phoneNumber
-    })
-
-    text.update({ timeSent: sendingMessage.dateCreated })
+    twilioText(campaign.message, contact.phoneNumber, text)
 
     return response.status(200).send('Text message has been successfully sent')
   } catch (e) {
     console.log(e)
+    const { id } = request.params
+    const text = await models.TextMessages.findOne({ where: { id } })
+
+    text.update({ status: 'Fail' })
 
     return response.status(500).send('Error while sending text message')
   }
