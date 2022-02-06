@@ -120,7 +120,7 @@ const startCampaign = async (request, response) => {
     const { id } = request.params
     const campaign = await models.TextCampaigns.findOne({ where: { id } })
 
-    campaign.update({ status: 'Fail' })
+    campaign.update({ status: 'Failed' })
 
     return response.status(500).send('Error while sending campaign')
   }

@@ -116,7 +116,7 @@ const sendTextMessage = async (request, response) => {
     const { id } = request.params
     const text = await models.TextMessages.findOne({ where: { id } })
 
-    text.update({ status: 'Fail' })
+    text.update({ status: 'Failed' })
 
     return response.status(500).send('Error while sending text message')
   }
