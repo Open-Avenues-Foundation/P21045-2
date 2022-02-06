@@ -95,8 +95,9 @@ const deleteCampaign = async (request, response) => {
 }
 
 const startCampaign = async (request, response) => {
+  const { id } = request.params
+
   try {
-    const { id } = request.params
     const campaign = await models.TextCampaigns.findOne({ where: { id } })
 
     if (!campaign) {
@@ -106,7 +107,8 @@ const startCampaign = async (request, response) => {
     const allTexts = await models.TextMessages.findAll({ where: { textCampaignId: id } })
 
     allTexts.forEach(async (text) => {
-      const contact = await models.Contacts.findOne({ where: { id: text.contactId } })
+      const { contactId } = text
+      const contact = await models.Contacts.findOne({ where: { id: contactId } })
 
       await twilioText(campaign.message, contact.phoneNumber, text)
 
@@ -117,7 +119,6 @@ const startCampaign = async (request, response) => {
     return response.status(200).send('Campaign has been successfully sent')
   } catch (e) {
     console.log(e)
-    const { id } = request.params
     const campaign = await models.TextCampaigns.findOne({ where: { id } })
 
     campaign.update({ status: 'Failed' })
