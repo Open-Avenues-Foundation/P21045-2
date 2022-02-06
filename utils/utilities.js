@@ -10,8 +10,8 @@ const twilioText = async (message, phoneNumber, text) => {
     to: phoneNumber
   })
 
-  text.update({ timeSent: sendingMessage.dateCreated })
-  text.update({ status: 'Sent' })
+  await text.update({ timeSent: sendingMessage.dateCreated })
+  await text.update({ status: 'Sent' })
 }
 
 module.exports = { twilioText }

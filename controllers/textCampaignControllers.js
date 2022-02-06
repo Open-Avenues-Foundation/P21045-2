@@ -106,22 +106,26 @@ const startCampaign = async (request, response) => {
 
     const allTexts = await models.TextMessages.findAll({ where: { textCampaignId: id } })
 
-    allTexts.forEach(async (text) => {
-      const { contactId } = text
-      const contact = await models.Contacts.findOne({ where: { id: contactId } })
+    await allTexts.forEach(async (text) => {
+      try { const contact = await models.Contacts.findOne({ where: { id: text.contactId } })
 
-      await twilioText(campaign.message, contact.phoneNumber, text)
-
-      campaign.update({ timeInitiated: text.timeSent })
-      campaign.update({ status: 'Sent' })
+        await twilioText(campaign.message, contact.phoneNumber, text)
+        await campaign.update({ timeInitiated: text.timeSent })
+      }
+      catch (e) {
+        await campaign.update({ status: 'Failed' })
+      }
     })
+    if (campaign.status === 'Failed') return response.status(500).send('Error while sending campaign')
+
+    campaign.update({ status: 'Sent' })
 
     return response.status(200).send('Campaign has been successfully sent')
   } catch (e) {
     console.log(e)
     const campaign = await models.TextCampaigns.findOne({ where: { id } })
 
-    campaign.update({ status: 'Failed' })
+    await campaign.update({ status: 'Failed' })
 
     return response.status(500).send('Error while sending campaign')
   }
