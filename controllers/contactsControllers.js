@@ -18,13 +18,15 @@ const getContactById = async (request, response) => {
   try {
     const { id } = request.params
 
-    const getContactById = await models.Contacts.findOne({
-      where: { id }
+    const getContactById = await models.Contacts.findAll({
+      where: {
+        [models.Op.or]: [{ firstName: { [models.Op.like]: `%${id}%` } }, { id }]
+      }
     })
 
-    return getContactById
-      ? response.send(getContactById)
-      : response.status(404).send('No contact found, please try again')
+    if (getContactById.length === 0) return response.status(404).send('No contact found, please try again')
+
+    return response.send(getContactById)
   } catch (e) {
     return response.status(500).send('Error trying to retrieve contact, please try again')
   }
