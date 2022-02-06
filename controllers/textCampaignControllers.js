@@ -35,13 +35,17 @@ const getCampaignById = async (request, response) => {
   try {
     const { id } = request.params
 
-    const getCampaignById = await models.TextCampaigns.findOne({
-      where: { id }
+    const getCampaignById = await models.TextCampaigns.findAll({
+      where: {
+        [models.Op.or]: [
+          { id }, { name: { [models.Op.like]: `%${id}%` } }
+        ]
+      }
     })
 
-    return getCampaignById
-      ? response.send(getCampaignById)
-      : response.status(404).send('No campaign found, please try again')
+    if (getCampaignById.length === 0) return response.status(404).send('No campaign found, please try again')
+
+    return response.send(getCampaignById)
   } catch (e) {
     return response.status(500).send('Error trying to retrieve campaign, please try again')
   }
