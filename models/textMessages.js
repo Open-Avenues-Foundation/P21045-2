@@ -4,7 +4,7 @@ const TextMessages = (connection, Sequelize, Contacts, TextCampaigns) => {
     contactId: { type: Sequelize.INTEGER, references: { model: Contacts, key: 'id' } },
     textCampaignId: { type: Sequelize.INTEGER, references: { model: TextCampaigns, key: 'id' } },
     timeSent: { type: Sequelize.DATE, allowNull: false },
-    status: { type: Sequelize.BOOLEAN, allowNull: false }
+    status: { type: Sequelize.ENUM('Pending', 'Sent', 'Failed'), allowNull: false }
   }, { paranoid: true })
 }
 
