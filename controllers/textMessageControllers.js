@@ -91,9 +91,9 @@ const deleteText = async (request, response) => {
 }
 
 const sendTextMessage = async (request, response) => {
-  try {
-    const { id } = request.body
+  const { id } = request.body
 
+  try {
     if (!id) {
       return response.status(400).send('Missing the id field')
     }
@@ -108,15 +108,14 @@ const sendTextMessage = async (request, response) => {
     const contact = await models.Contacts.findOne({ where: { id: text.contactId } })
 
 
-    twilioText(campaign.message, contact.phoneNumber, text)
+    await twilioText(campaign.message, contact.phoneNumber, text)
 
     return response.status(200).send('Text message has been successfully sent')
   } catch (e) {
     console.log(e)
-    const { id } = request.params
     const text = await models.TextMessages.findOne({ where: { id } })
 
-    text.update({ status: 'Fail' })
+    text.update({ status: 'Failed' })
 
     return response.status(500).send('Error while sending text message')
   }

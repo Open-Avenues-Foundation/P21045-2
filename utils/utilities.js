@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const twilioText = async (message, phoneNumber, text) => {
   const accountSid = process.env.TWILIO_ACCOUNT_SID
   const authToken = process.env.TWILIO_AUTH_TOKEN
@@ -9,8 +10,8 @@ const twilioText = async (message, phoneNumber, text) => {
     to: phoneNumber
   })
 
-  text.update({ timeSent: sendingMessage.dateCreated })
-  text.update({ status: 'Sent' })
+  await text.update({ timeSent: sendingMessage.dateCreated })
+  await text.update({ status: 'Sent' })
 }
 
 module.exports = { twilioText }
