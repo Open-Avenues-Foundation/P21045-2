@@ -27,7 +27,7 @@ module.exports = {
       id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
       message: { type: Sequelize.STRING, allowNull: false },
       name: { type: Sequelize.STRING, allowNull: false },
-      timeInitiated: { type: Sequelize.DATE, allowNull: true },
+      timeInitiated: { type: Sequelize.DATE, defaultValue: null, allowNull: true },
       status: { type: Sequelize.ENUM('Pending', 'Sent', 'Failed'), defaultValue: 'Pending', allowNull: false },
       createdAt: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
       updatedAt: {
@@ -40,7 +40,7 @@ module.exports = {
       id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
       contactId: { type: Sequelize.INTEGER, references: { model: 'contacts', key: 'id' } },
       textCampaignId: { type: Sequelize.INTEGER, references: { model: 'textCampaigns', key: 'id' } },
-      timeSent: { type: Sequelize.DATE, allowNull: false },
+      timeSent: { type: Sequelize.DATE, defaultValue: null, allowNull: true },
       status: { type: Sequelize.ENUM('Pending', 'Sent', 'Failed'), defaultValue: 'Pending', allowNull: false },
       createdAt: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
       updatedAt: {

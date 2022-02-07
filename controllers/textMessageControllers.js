@@ -4,13 +4,13 @@ const { twilioText } = require('../utils/utilities')
 
 const addText = async (request, response) => {
   try {
-    const { contactId, textCampaignId, timeSent, status } = request.body
+    const { contactId, textCampaignId } = request.body
 
-    if (!contactId || !textCampaignId || !timeSent || !status) {
-      return response.status(400).send('Missing one of the following: contactId, textCampaignId, timeSent, status')
+    if (!contactId || !textCampaignId) {
+      return response.status(400).send('Missing one of the following: contactId, textCampaignId')
     }
 
-    const newText = await models.TextMessages.create({ contactId, textCampaignId, timeSent, status })
+    const newText = await models.TextMessages.create({ contactId, textCampaignId })
 
     return response.status(201).send(newText)
   } catch (e) {
