@@ -4,13 +4,13 @@ const { twilioText } = require('../utils/utilities')
 
 const addCampaign = async (request, response) => {
   try {
-    const { message, name, timeInitiated, status } = request.body
+    const { message, name } = request.body
 
-    if (!message || !name || !timeInitiated || !status) {
-      return response.status(400).send('Missing one of the following: message, name, timeInitiated, status')
+    if (!message || !name) {
+      return response.status(400).send('Missing one of the following: message, name')
     }
 
-    const newCampaign = await models.TextCampaigns.create({ message, name, timeInitiated, status })
+    const newCampaign = await models.TextCampaigns.create({ message, name })
 
     return response.status(201).send(newCampaign)
   } catch (e) {

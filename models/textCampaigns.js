@@ -3,7 +3,7 @@ const TextCampaigns = (connection, Sequelize) => {
     id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
     message: { type: Sequelize.STRING, allowNull: false },
     name: { type: Sequelize.STRING, allowNull: false },
-    timeInitiated: { type: Sequelize.DATE, allowNull: true },
+    timeInitiated: { type: Sequelize.DATE, defaultValue: null, allowNull: true },
     status: { type: Sequelize.ENUM('Pending', 'Sent', 'Failed'), defaultValue: 'Pending', allowNull: false }
   }, { paranoid: true })
 }
