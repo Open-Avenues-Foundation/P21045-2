@@ -50,17 +50,17 @@ module.exports = {
     ])
 
     await queryInterface.bulkInsert('textCampaigns', [
-      { message: 'This is the first message', name: 'first message', timeInitiated: '2019-05-05', status: 'Pending' },
-      { message: 'This is the second message', name: 'second message', timeInitiated: '2020-06-06', status: 'Pending' },
-      { message: 'This is the third message', name: 'third message', timeInitiated: '2021-07-07', status: 'Pending' },
-      { message: 'This is the fourth message', name: 'fourth message', timeInitiated: '2022-08-08', status: 'Pending' }
+      { message: 'This is the first message', name: 'first message', timeInitiated: '2019-05-05' },
+      { message: 'This is the second message', name: 'second message', timeInitiated: '2020-06-06' },
+      { message: 'This is the third message', name: 'third message', timeInitiated: '2021-07-07' },
+      { message: 'This is the fourth message', name: 'fourth message', timeInitiated: '2022-08-08' }
     ])
 
     return queryInterface.bulkInsert('textMessages', [
-      { contactId: 1, textCampaignId: 1, timeSent: '2000-04-04 15:57:59.000', status: 'Pending' },
-      { contactId: 2, textCampaignId: 2, timeSent: '2001-04-04 15:57:59.000', status: 'Pending' },
-      { contactId: 3, textCampaignId: 3, timeSent: '2002-04-04 15:57:59.000', status: 'Pending' },
-      { contactId: 4, textCampaignId: 4, timeSent: '2003-04-04 15:57:59.000', status: 'Pending' }
+      { contactId: 1, textCampaignId: 1, timeSent: '2000-04-04 15:57:59.000' },
+      { contactId: 2, textCampaignId: 2, timeSent: '2001-04-04 15:57:59.000' },
+      { contactId: 3, textCampaignId: 3, timeSent: '2002-04-04 15:57:59.000' },
+      { contactId: 4, textCampaignId: 4, timeSent: '2003-04-04 15:57:59.000' }
     ])
   },
 
