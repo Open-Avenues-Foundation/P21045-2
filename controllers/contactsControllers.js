@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 /* eslint-disable max-len */
 const models = require('../models')
+const csv = require('csvtojson')
+
 
 const getAllContacts = async (request, response) => {
   try {
@@ -99,9 +101,38 @@ const deleteContact = async (request, response) => {
   }
 }
 
-const uploadCSVFile = (request, response) => {
-  response.send('To Do')
-}
+const uploadCSVFile = async (request, response) => {
+  try { const { file: { path } } = request
+
+    const csvObject = await csv().fromFile(path)
+
+    const validateContacts = csvObject.filter(contact => {
+      const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
+      return mailFormat.test(contact.email)
+    })
+      .filter(contact => {
+        const phoneFormat = /(?=\(|\b)(?:\+?1 ?[-.]?)?(?:\(\d{3}\)|\d{3}) ?[-.]? ?\d{3} ?[-.]? ?\d{4}\b/
+
+        return phoneFormat.test(contact.phoneNumber)
+      })
+
+    for (let i = 0; i < validateContacts.length; i++) {
+      const {
+        firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOrderDate
+      } = validateContacts[i]
+
+      await models.Contacts.create({
+        firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOrderDate
+      })
+    }
+
+    return response.status(200).send('Successfully created new contacts via the CSV file')
+  } catch (e) {
+    console.log(e)
+
+    return response.status(500).send('Unable to import csv file')
+  } }
 
 module.exports = {
   createNewPerson,
