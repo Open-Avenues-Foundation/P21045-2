@@ -116,6 +116,12 @@ const uploadCSVFile = async (request, response) => {
 
         return phoneFormat.test(contact.phoneNumber)
       })
+      .filter(contact => {
+        // input is an object
+        const emailString = contact.email.toString()
+
+        return (emailString[emailString.length - 1] !== 'o')
+      })
 
     for (let i = 0; i < validateContacts.length; i++) {
       const {
@@ -127,7 +133,7 @@ const uploadCSVFile = async (request, response) => {
       })
     }
 
-    return response.status(200).send('Successfully created new contacts via the CSV file')
+    return response.status(200).send('Successfully created contacts from the CSV file')
   } catch (e) {
     console.log(e)
 
