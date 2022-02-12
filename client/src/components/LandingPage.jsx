@@ -43,7 +43,7 @@ const LandingPage = () => {
                     )
                 })} */}
             </div>
-            <ContactsTable contacts={contacts}/> 
+            <ContactsTable contacts={matchingContacts}/> 
         </div>
     )
 }
