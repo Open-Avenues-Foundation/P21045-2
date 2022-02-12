@@ -15,7 +15,7 @@ module.exports = {
       city: { type: Sequelize.STRING, allowNull: false },
       state: { type: Sequelize.STRING, allowNull: false },
       lastOrderPrice: { type: Sequelize.INTEGER, allowNull: false },
-      lastOrderDate: { type: Sequelize.DATE, allowNull: false },
+      lastOrderDate: { type: Sequelize.DATEONLY, allowNull: false },
       createdAt: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
       updatedAt: {
         type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
