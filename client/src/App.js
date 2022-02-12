@@ -1,10 +1,12 @@
-import logo from './logo.svg';
+import CSVUpload from './components/CSVUpload'
 import './App.css';
+import LandingPage from './components/LandingPage'
 
 function App() {
   return (
     <div className="App">
-      <h2>hello</h2>
+      <LandingPage/>
+        <CSVUpload/>
     </div>
   );
 }

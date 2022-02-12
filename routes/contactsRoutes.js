@@ -2,6 +2,8 @@ const express = require('express')
 
 const contactsControllers = require('../controllers/contactsControllers')
 const router = express.Router()
+const multer = require('multer')
+const upload = multer({ dest: 'upload/' })
 
 
 router.post('/', contactsControllers.createNewPerson) // uploads a contact (or contacts) using "Add Contacts" made on our UI(FrontEnd)
@@ -14,6 +16,6 @@ router.put('/:id', contactsControllers.updateContact) // updates an existing con
 
 router.delete('/:id', contactsControllers.deleteContact) // deletes an existing contact
 
-router.post('/upload', contactsControllers.uploadCSVFile) // uploads contacts using a CSV file to the database
+router.post('/upload', upload.single('file_uploaded'), contactsControllers.uploadCSVFile) // uploads contacts using a CSV file to the database
 
 module.exports = router
