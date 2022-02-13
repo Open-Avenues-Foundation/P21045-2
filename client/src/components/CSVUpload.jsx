@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button"
 
 const CSVUpload = () => {
 
@@ -10,8 +11,10 @@ const CSVUpload = () => {
                     <input type="file" class="admin__input" id="file_uploaded" name="file_uploaded" />
                     <input class="admin__submit" type="submit" />
                 </form>
-                <p>*File must be in CSV format</p>
-                <Link to={'/'}>Back</Link>
+                <p>*File must be in CSV format with the following headers:</p>
+                <p>firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOrderDate</p>
+                <Button variant="link" ><Link to={'/'}>Back</Link></Button>
+                
             </div>
         </main>
     )

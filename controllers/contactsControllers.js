@@ -104,7 +104,6 @@ const deleteContact = async (request, response) => {
 const uploadCSVFile = async (request, response) => {
   try { const { file: { path } } = request
 
-    if (path) return response.status(400).send('Error with file upload, please ensure formatting is correct')
     const csvObject = await csv().fromFile(path)
 
     const validateContacts = csvObject.filter(contact => {
@@ -123,10 +122,16 @@ const uploadCSVFile = async (request, response) => {
         return (emailString[emailString.length - 1] !== 'o')
       })
 
+    if (validateContacts.length === 0) return response.status(400).send('Error with file upload, please ensure file format is correct')
+
     for (let i = 0; i < validateContacts.length; i++) {
       const {
         firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOrderDate
       } = validateContacts[i]
+
+      if (!firstName || !lastName || !email || !city || !state || !phoneNumber || !lastOrderPrice || !lastOrderDate) {
+        return response.status(400).send('One or more headers are incorrect, please ensure file headings are as follows: firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOderDate')
+      }
 
       await models.Contacts.create({
         firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOrderDate
