@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CSVUpload = () => {
 
@@ -9,6 +10,8 @@ const CSVUpload = () => {
                     <input type="file" class="admin__input" id="file_uploaded" name="file_uploaded" />
                     <input class="admin__submit" type="submit" />
                 </form>
+                <p>*File must be in CSV format</p>
+                <Link to={'/'}>Back</Link>
             </div>
         </main>
     )
