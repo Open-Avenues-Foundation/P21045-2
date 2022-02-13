@@ -22,7 +22,7 @@ const getContactById = async (request, response) => {
 
     const getContactById = await models.Contacts.findAll({
       where: {
-        [models.Op.or]: [{ firstName: { [models.Op.like]: `%${id}%` } }, { id }]
+        [models.Op.or]: [{ firstName: { [models.Op.like]: `${id}%` } }, { id }]
       }
     })
 
@@ -106,37 +106,19 @@ const uploadCSVFile = async (request, response) => {
 
     const csvObject = await csv().fromFile(path)
 
-    const validateContacts = csvObject.filter(contact => {
+    const isValidContact = (contact) => {
       const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+      const phoneFormat = /(?=\(|\b)(?:\+?1 ?[-.]?)?(?:\(\d{3}\)|\d{3}) ?[-.]? ?\d{3} ?[-.]? ?\d{4}\b/
+      const emailString = contact.email.toString()
 
-      return mailFormat.test(contact.email)
-    })
-      .filter(contact => {
-        const phoneFormat = /(?=\(|\b)(?:\+?1 ?[-.]?)?(?:\(\d{3}\)|\d{3}) ?[-.]? ?\d{3} ?[-.]? ?\d{4}\b/
-
-        return phoneFormat.test(contact.phoneNumber)
-      })
-      .filter(contact => {
-        const emailString = contact.email.toString()
-
-        return (emailString[emailString.length - 1] !== 'o')
-      })
-
-    if (validateContacts.length === 0) return response.status(400).send('Error with file upload, please ensure file format is correct')
-
-    for (let i = 0; i < validateContacts.length; i++) {
-      const {
-        firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOrderDate
-      } = validateContacts[i]
-
-      if (!firstName || !lastName || !email || !city || !state || !phoneNumber || !lastOrderPrice || !lastOrderDate) {
-        return response.status(400).send('One or more headers are incorrect, please ensure file headings are as follows: firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOderDate')
-      }
-
-      await models.Contacts.create({
-        firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOrderDate
-      })
+      return mailFormat.test(contact.email) && phoneFormat.test(contact.phoneNumber) && (emailString[emailString.length - 1] !== 'o')
     }
+
+    const validContacts = csvObject.filter(contact => isValidContact(contact))
+
+    if (validContacts.length === 0) return response.status(400).send('Error with file upload, please ensure file format is correct')
+
+    await models.Contacts.bulkCreate(validContacts)
 
     return response.status(200).send('Successfully created contacts from the CSV file')
   } catch (e) {
