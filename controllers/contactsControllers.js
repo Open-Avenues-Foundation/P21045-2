@@ -104,6 +104,7 @@ const deleteContact = async (request, response) => {
 const uploadCSVFile = async (request, response) => {
   try { const { file: { path } } = request
 
+    if (path) return response.status(400).send('Error with file upload, please ensure formatting is correct')
     const csvObject = await csv().fromFile(path)
 
     const validateContacts = csvObject.filter(contact => {
@@ -117,7 +118,6 @@ const uploadCSVFile = async (request, response) => {
         return phoneFormat.test(contact.phoneNumber)
       })
       .filter(contact => {
-        // input is an object
         const emailString = contact.email.toString()
 
         return (emailString[emailString.length - 1] !== 'o')
