@@ -6,7 +6,7 @@ const CampaignPage = () => {
     return (
         <div>
             <h1>This Is The Campaign Page</h1>
-            <NavLink to='/'>
+            <NavLink to='/createCampaign'>
                 <Button>Go Back</Button>
             </NavLink>
         </div>
