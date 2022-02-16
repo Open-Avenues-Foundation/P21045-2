@@ -5,7 +5,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ContactsTable from './components/ContactsTable';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import CampaignPage from './components/CampaignPage'
 import CampaignCreation from './components/CampaignCreation';
 import CampaignId from './components/CampaignId';
@@ -48,7 +47,6 @@ function App() {
           <Route path='/contact/upload' element={ <CSVUpload/>} />
           <Route element={ <ContactsTable/>}/>
           <Route path="/campaign" element={<CampaignPage/>} />
-          <Route path="/campaign/:id" element={<CampaignId/>} />
           <Route path="/createCampaign" element={<CampaignCreation contacts={contacts} />} />
           <Route path="/" element={<LandingPage/>} />
           {/* <Route path="*" element={<Error/>} /> */}
