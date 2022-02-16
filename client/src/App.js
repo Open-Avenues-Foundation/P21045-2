@@ -5,6 +5,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ContactsTable from './components/ContactsTable';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
+import CampaignPage from './components/CampaignPage'
+
+
 
 function App() {
   return (
@@ -13,10 +16,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/contact/upload' element={ <CSVUpload/>} />
+          <Route path='/campaign' element ={ <CampaignPage/>}/>
           <Route path='/' element ={ <LandingPage/>} />
-          <Route element={ <ContactsTable/>}/>
         </Routes>
-      </BrowserRouter>
+		</BrowserRouter>
     </div>
   );
 }
