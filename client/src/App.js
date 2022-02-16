@@ -16,10 +16,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/contact/upload' element={ <CSVUpload/>} />
-          <Route element={ <ContactsTable/>}/>
-          <Route path="/campaign" element={<CampaignPage/>} />
-          <Route path="/" element={<LandingPage/>} />
-          {/* <Route path="*" element={<Error/>} /> */}
+          <Route path='/campaign' element ={ <CampaignPage/>}/>
+          <Route path='/' element ={ <LandingPage/>} />
         </Routes>
 		</BrowserRouter>
     </div>

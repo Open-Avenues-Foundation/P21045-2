@@ -64,8 +64,8 @@ const LandingPage = () => {
                 <input className="searchBox" type="text" name="search" placeholder='Search Contact...'
                     onChange={(event) => filteredContacts(event.target.value)}
                 />{' '}
-                <Button variant="outlined"><Link to={'/contact/upload'}>Upload Contacts</Link></Button>{' '}
-                <Button variant="outlined"><Link to={'/campaign'}>View Campaigns</Link></Button>
+                <Link to={'/contact/upload'}><Button variant="outlined">Upload Contacts</Button></Link>{' '}
+                <Link to={'/campaign'}><Button variant="outlined">View Campaigns</Button></Link>
             </div>
             <div>
                 {/* {matchingContacts.map(contact => {

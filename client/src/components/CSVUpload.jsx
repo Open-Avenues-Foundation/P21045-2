@@ -42,7 +42,7 @@ const CSVUpload = ({ resetForm }) => {
             </form>
                 <p>*File must have the following headers:</p>
                 <p>firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOrderDate</p>
-                <Button variant="outlined" ><Link to={'/'}>Back</Link></Button>
+                <Link to={'/'}><Button variant="outlined" >Back</Button></Link>
             </div>
         </main>
     )
