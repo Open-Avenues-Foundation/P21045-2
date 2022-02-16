@@ -18,11 +18,17 @@ export default function DataTable() {
         }))
     }, [campaignsNeedUpdate])
 
+    function sleeper(ms) {
+        return function (x) {
+            return new Promise(resolve => setTimeout(() => resolve(x), ms));
+        };
+    }
+
     const StartButton = (props) => {
         const { params } = props
 
         const handleOnClick = async () => {
-            await axios.post(`http://localhost:1336/api/campaign/start/${params.row.id}`).then((payload) => {
+            await axios.post(`http://localhost:1336/api/campaign/start/${params.row.id}`).then(sleeper(1000)).then((payload) => {
                 setCampaignsNeedUpdate(true)
             })
             
@@ -62,7 +68,7 @@ export default function DataTable() {
                     pageSize={5}
                     rowsPerPageOptions={[5]}
                 />
-                <Button variant="outlined" ><Link to={'/'}>Back</Link></Button>
+                <Link to={'/'}><Button variant="outlined" >Back</Button></Link>
             </div>
         </div>
     );
