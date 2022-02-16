@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import ContactsTable from './ContactsTable'
 
 const LandingPage = () => {
     const [contacts, setContacts] = useState([])
@@ -25,7 +26,7 @@ const LandingPage = () => {
     }
 
     return (
-        <div>
+        <div> 
             <div>
                 <input className="searchBox" type="text" name="search" placeholder='Search Contact...'
                     onChange={(event) => filteredContacts(event.target.value)}
@@ -34,14 +35,15 @@ const LandingPage = () => {
                 <Button variant="outline-dark"><Link to={'/campaign'}>View Campaigns</Link></Button>
             </div>
             <div>
-                {matchingContacts.map(contact => {
+                {/* {matchingContacts.map(contact => {
                     return (
                         <div key={contact.id}>
                             {contact.firstName} {contact.lastName}
                         </div>
                     )
-                })}
+                })} */}
             </div>
+            <ContactsTable contacts={contacts}/> 
         </div>
     )
 }
