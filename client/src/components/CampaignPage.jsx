@@ -7,6 +7,7 @@ import Button from '@mui/material/Button'
 
 export default function DataTable() {
     const [campaigns, setCampaigns] = useState([])
+    const [matchingCampaigns, setMatchingCampaigns] = useState([])
     const [campaignsNeedUpdate, setCampaignsNeedUpdate] = useState(false)
 
     useEffect(() => {
@@ -14,9 +15,18 @@ export default function DataTable() {
         axios.get('http://localhost:1336/api/campaign').then((payload => {
             const { data } = payload
             setCampaigns(data) 
+            setMatchingCampaigns(data)
             setCampaignsNeedUpdate(false)
         }))
     }, [campaignsNeedUpdate])
+
+    const filteredCampaigns = (userInput) => {
+        const matchingCampaigns = campaigns.filter(campaign => {
+            return campaign.name.toLowerCase().startsWith(userInput.toLowerCase())
+        })
+
+        setMatchingCampaigns(matchingCampaigns)
+    }
 
     function sleeper(ms) {
         return function (x) {
@@ -61,9 +71,12 @@ export default function DataTable() {
 
     return (
         <div>
+            <input className="searchBox" type="text" name="search" placeholder='Search Campaigns...'
+                onChange={(event) => filteredCampaigns(event.target.value)}
+            />
             <div style={{ height: 400, width: '100%' }}>
                 <DataGrid
-                    rows={campaigns}    
+                    rows={matchingCampaigns}    
                     columns={columns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
