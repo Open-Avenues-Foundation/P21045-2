@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import CampaignPage from './components/CampaignPage'
 import CampaignCreation from './components/CampaignCreation';
+import CampaignId from './components/CampaignId';
 
 const contacts = [{
   id: 2,
@@ -47,6 +48,7 @@ function App() {
           <Route path='/contact/upload' element={ <CSVUpload/>} />
           <Route element={ <ContactsTable/>}/>
           <Route path="/campaign" element={<CampaignPage/>} />
+          <Route path="/campaign/:id" element={<CampaignId/>} />
           <Route path="/createCampaign" element={<CampaignCreation contacts={contacts} />} />
           <Route path="/" element={<LandingPage/>} />
           {/* <Route path="*" element={<Error/>} /> */}
