@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Button from 'react-bootstrap/Button'
+import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import ContactsTable from './ContactsTable'
@@ -31,8 +31,8 @@ const LandingPage = () => {
                 <input className="searchBox" type="text" name="search" placeholder='Search Contact...'
                     onChange={(event) => filteredContacts(event.target.value)}
                 />{' '}
-                <Button variant="outline-dark"><Link to={'/contact/upload'}>Upload Contacts</Link></Button>{' '}
-                <Button variant="outline-dark"><Link to={'/campaign'}>View Campaigns</Link></Button>
+                <Button variant="outlined"><Link to={'/contact/upload'}>Upload Contacts</Link></Button>{' '}
+                <Button variant="outlined"><Link to={'/campaign'}>View Campaigns</Link></Button>
             </div>
             <div>
                 {/* {matchingContacts.map(contact => {
