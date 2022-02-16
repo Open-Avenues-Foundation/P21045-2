@@ -7,6 +7,10 @@
     "@emotion/styled": "^11.6.0",
     "@mui/material": "^5.4.1",
     "@mui/x-data-grid": "^5.5.1",
+<<<<<<< HEAD
+    "@popperjs/core": "^2.11.2",
+=======
+>>>>>>> main
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
