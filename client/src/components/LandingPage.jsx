@@ -7,6 +7,7 @@ import ContactsTable from './ContactsTable'
 const LandingPage = () => {
     const [contacts, setContacts] = useState([])
     const [matchingContacts, setMatchingContacts] = useState([])
+    const [selectedContacts, setSelectedContacts] = useState([])
 
     useEffect(() => {
 
@@ -43,7 +44,7 @@ const LandingPage = () => {
                     )
                 })} */}
             </div>
-            <ContactsTable contacts={matchingContacts}/> 
+            <ContactsTable contacts={matchingContacts} selectedContacts={selectedContacts} setSelectedContacts={setSelectedContacts}/> 
         </div>
     )
 }
