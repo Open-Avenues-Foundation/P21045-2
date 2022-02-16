@@ -4,33 +4,60 @@ import {DataGrid} from '@mui/x-data-grid'
 import axios from 'axios'
 import Button from '@mui/material/Button'
 
-const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'name', headerName: 'Campaign Name', width: 200 },
-    { field: 'message', 
-    headerName: 'Message',
-    description: 'This column is not sortable',
-    sortable: false,
-    width: 300 },
-    { field: 'timeInitiated', headerName: 'Executed Date', width: 200 },
-    { field: 'status', headerName: 'Status', width: 130 }]
 
 export default function DataTable() {
     const [campaigns, setCampaigns] = useState([])
+    const [campaignsNeedUpdate, setCampaignsNeedUpdate] = useState(false)
 
     useEffect(() => {
 
         axios.get('http://localhost:1336/api/campaign').then((payload => {
             const { data } = payload
             setCampaigns(data) 
+            setCampaignsNeedUpdate(false)
         }))
-    }, [])
+    }, [campaignsNeedUpdate])
+
+    const StartButton = (props) => {
+        const { params } = props
+
+        const handleOnClick = async () => {
+            await axios.post(`http://localhost:1336/api/campaign/start/${params.row.id}`).then((payload) => {
+                setCampaignsNeedUpdate(true)
+            })
+            
+        }
+
+        return (
+            <Button onClick={handleOnClick}>Start</Button>
+        )
+    }
+
+    const columns = [
+        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'name', headerName: 'Campaign Name', width: 200 },
+        {
+            field: 'message',
+            headerName: 'Message',
+            description: 'This column is not sortable',
+            sortable: false,
+            width: 300
+        },
+        { field: 'timeInitiated', headerName: 'Executed Date', width: 200 },
+        { field: 'status', headerName: 'Status', width: 130 },
+        {
+            field: '', headerName: "Start", width: 135, renderCell: (params) => {
+
+                return <StartButton params={params} />
+            }, disableClickEventBubbling: true
+        }
+    ]
 
     return (
         <div>
             <div style={{ height: 400, width: '100%' }}>
                 <DataGrid
-                    rows={campaigns}
+                    rows={campaigns}    
                     columns={columns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
