@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
-import InputLabel from '@mui/material/InputLabel';
-import Input from '@mui/material/Input';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -33,29 +29,16 @@ const CampaignCreation = (props) => {
   }
 
 return (
-  <div className='Campaign-section'>
 
-    <FormGroup>
+<div className='Campaign-section'>
+    <FormGroup size='normal'>
         <TextField id="Campaign Name" margin="normal" label="Campaign Name" variant="outlined" 
         onChange={(event) => setCampaignName(event.target.value)} value={campaignName} />
-        <TextField id="Campaign Message" margin="normal" label="Campaign Message" variant="outlined"
+        <TextField id="Campaign Message" margin="normal" label="Campaign Message" variant="outlined" multiline
         onChange={(event) => setCampaignBody(event.target.value)} value={campaignBody} />
     </FormGroup>
-
-    {/* <FormGroup className="mb-3" controlId="campaignName">
-        <FormControlLabel>Campaign Name</FormControlLabel>
-      <FormControl type="name" onChange={(event) => setCampaignName(event.target.value)} value={campaignName}/>
-    </FormGroup>
-    <FormGroup className="mb-3" controlId="campaignMessage">
-        <FormControlLabel>Campaign Message</FormControlLabel>
-      <FormControl as="textarea" onChange={(event) => setCampaignBody(event.target.value)} value={campaignBody} rows={3} />
-    </FormGroup> */}
-
-        <Button variant='contained' onClick={createCampaign}>Create Campaign</Button>
-
+    <Button variant='contained' onClick={createCampaign}>Create Campaign</Button>
 </div>
-
-
 )
 }
 
