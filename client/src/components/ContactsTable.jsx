@@ -5,8 +5,18 @@ import {Button} from '@mui/material'
 
 
 export default function ContactsTable(props) { 
- const {contacts} = props
+  const {contacts,selectedContacts,setSelectedContacts} = props
+  const [selectedIndex,setSelectedIndex] = useState([])
+
+  useEffect(() => {
+console.log(selectedContacts)
+  },[selectedContacts])
   
+  useEffect(()=> {
+    setSelectedContacts(contacts.filter((contact,index) =>{
+      return  selectedIndex.includes(index+1)}))
+  },[selectedIndex,contacts])
+ 
 const StartButton = () => {
 return (
 <Button> start </Button>
@@ -54,6 +64,8 @@ return (
         pageSize={5}
         rowsPerPageOptions={[5]}
         checkboxSelection
+        selectionModel={selectedIndex}
+        onSelectionModelChange={(newSelectionModel) =>{setSelectedIndex(newSelectionModel)} } 
       />
     </div>
   );

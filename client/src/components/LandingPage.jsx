@@ -11,6 +11,7 @@ import CSVUpload from "./CSVUpload";
 const LandingPage = () => {
     const [contacts, setContacts] = useState([])
     const [matchingContacts, setMatchingContacts] = useState([])
+    const [selectedContacts, setSelectedContacts] = useState([])
 
     const mockContacts = [{
         id: 2,
@@ -76,8 +77,10 @@ const LandingPage = () => {
                     )
                 })} */}
             </div>
-            <ContactsTable contacts={matchingContacts}/> 
+
+            <ContactsTable contacts={matchingContacts} selectedContacts={selectedContacts} setSelectedContacts={setSelectedContacts}/> 
             <CampaignCreation contacts={mockContacts} />
+
         </div>
     )
 }
