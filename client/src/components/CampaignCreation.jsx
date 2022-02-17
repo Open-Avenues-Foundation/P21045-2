@@ -13,10 +13,6 @@ const CampaignCreation = (props) => {
 
   const createCampaign = async () => {
 
-    if(campaignBody || campaignName === '') {
-      
-    }
-
     const newCampaign = await axios.post('http://localhost:1336/api/campaign/', {
       message: campaignBody, name: campaignName
 
