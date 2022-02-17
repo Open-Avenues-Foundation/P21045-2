@@ -23,7 +23,7 @@ const CampaignCreation = (props) => {
       })
       console.log(newTextMessage)
     })
-    navigate(`/campaign/${newCampaign.data.id}`)
+    navigate('/campaign')
 
   }
 

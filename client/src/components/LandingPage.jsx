@@ -47,11 +47,7 @@ const LandingPage = () => {
                 <Link to={'/campaign'}><Button variant="outlined">View Campaigns</Button></Link>
             </div>
             <ContactsTable contacts={matchingContacts} selectedContacts={selectedContacts} setSelectedContacts={setSelectedContacts}/> 
-<<<<<<< HEAD
             <CampaignCreation contacts={selectedContacts} />
-=======
-            <CampaignCreation contacts={matchingContacts} />
->>>>>>> 721f0af (changes)
 
         </div>
     )
