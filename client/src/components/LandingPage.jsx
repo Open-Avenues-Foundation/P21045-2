@@ -5,6 +5,8 @@ import axios from 'axios'
 import ContactsTable from './ContactsTable'
 import CampaignCreation from "./CampaignCreation"; 
 import CSVUpload from "./CSVUpload";
+import ContactsSearchFilter from './ContactsSearchFilter';
+
 
 
 
@@ -12,6 +14,8 @@ const LandingPage = () => {
     const [contacts, setContacts] = useState([])
     const [matchingContacts, setMatchingContacts] = useState([])
     const [selectedContacts, setSelectedContacts] = useState([])
+    const [filterProperty, setFilterProperty] = useState('firstName')
+    const [searchTerm, setSearchTerm] = useState ('')
 
     useEffect(() => {
 
@@ -22,33 +26,26 @@ const LandingPage = () => {
         })
     }, [])
 
-    const filteredContacts = (userInput) => {
+    useEffect(() => {
+        
         const matchingContacts = contacts.filter(contact => {
-            return contact.firstName.toLowerCase().startsWith(userInput.toLowerCase())
+            return contact[filterProperty].toLowerCase().includes(searchTerm.toLowerCase())
         })
 
         setMatchingContacts(matchingContacts)
-    }
+    },[searchTerm,filterProperty,contacts])
+
 
     return (
         <div> 
             <div>
-                <input className="searchBox" type="text" name="search" placeholder='Search Contact...'
-                    onChange={(event) => filteredContacts(event.target.value)}
+                <ContactsSearchFilter filterProperty={filterProperty} setFilterProperty={setFilterProperty}/> 
+                <input className="searchBox" type="text" name="search"  value= {searchTerm} placeholder='Search Contact...'
+                    onChange={(event) => setSearchTerm(event.target.value)}
                 />{' '}
                 <Link to={'/contact/upload'}><Button variant="outlined">Upload Contacts</Button></Link>{' '}
                 <Link to={'/campaign'}><Button variant="outlined">View Campaigns</Button></Link>
             </div>
-            <div>
-                {/* {matchingContacts.map(contact => {
-                    return (
-                        <div key={contact.id}>
-                            {contact.firstName} {contact.lastName}
-                        </div>
-                    )
-                })} */}
-            </div>
-
             <ContactsTable contacts={matchingContacts} selectedContacts={selectedContacts} setSelectedContacts={setSelectedContacts}/> 
             <CampaignCreation contacts={selectedContacts} />
 
