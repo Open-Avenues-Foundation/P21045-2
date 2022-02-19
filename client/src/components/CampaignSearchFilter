@@ -4,24 +4,24 @@ import {MenuItem, Select } from '@mui/material';
 
 const CampaignSearchFilter = (props) => {
     const {filterProperty,setFilterProperty} = props
-//     return (
+    return (
     
-//         <Select
-//         value={campaignFilterProperty} 
-//         onChange={ (event) => {
-//           setCampaignFilterProperty(event.target.value)
+        <Select
+        value={filterProperty} 
+        onChange={ (event) => {
+          setFilterProperty(event.target.value)
 
-//         }  }   
-//          >
-//           <MenuItem value={'campaignName'} >  First Name </MenuItem>
-//           <MenuItem value={'message'} > Last Name </MenuItem>
-//           <MenuItem value={'timeInitiated'} > Email </MenuItem>
-//           <MenuItem value={'status'} > Phone Number </MenuItem>
+        }  }   
+         >
+          <MenuItem value={'campaignName'} >  First Name </MenuItem>
+          <MenuItem value={'message'} > Last Name </MenuItem>
+          <MenuItem value={'timeInitiated'} > Email </MenuItem>
+          <MenuItem value={'status'} > Phone Number </MenuItem>
  
-//         </Select>
+        </Select>
         
   
-//     )
+    )
  }
 
-// export default CampaignSearchFilter 
+export default CampaignSearchFilter 
