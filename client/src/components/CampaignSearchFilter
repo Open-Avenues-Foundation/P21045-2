@@ -1,0 +1,27 @@
+import React from 'react';
+import {MenuItem, Select } from '@mui/material';
+
+
+const CampaignSearchFilter = (props) => {
+    const {filterProperty,setFilterProperty} = props
+//     return (
+    
+//         <Select
+//         value={campaignFilterProperty} 
+//         onChange={ (event) => {
+//           setCampaignFilterProperty(event.target.value)
+
+//         }  }   
+//          >
+//           <MenuItem value={'campaignName'} >  First Name </MenuItem>
+//           <MenuItem value={'message'} > Last Name </MenuItem>
+//           <MenuItem value={'timeInitiated'} > Email </MenuItem>
+//           <MenuItem value={'status'} > Phone Number </MenuItem>
+ 
+//         </Select>
+        
+  
+//     )
+ }
+
+// export default CampaignSearchFilter 
