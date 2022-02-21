@@ -4,10 +4,8 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import ContactsTable from './ContactsTable'
 import CampaignCreation from "./CampaignCreation"; 
-import CSVUpload from "./CSVUpload";
 import ContactsSearchFilter from './ContactsSearchFilter';
-
-
+import './LandingPage.css'
 
 
 const LandingPage = () => {
@@ -39,7 +37,7 @@ const LandingPage = () => {
     return (
         <div> 
             <div>
-                <ContactsSearchFilter filterProperty={filterProperty} setFilterProperty={setFilterProperty}/> 
+                <ContactsSearchFilter className='filter' filterProperty={filterProperty} setFilterProperty={setFilterProperty}/> 
                 <input className="searchBox" type="text" name="search"  value= {searchTerm} placeholder='Search Contact...'
                     onChange={(event) => setSearchTerm(event.target.value)}
                 />{' '}
