@@ -7,19 +7,16 @@ const CampaignSearchFilter = (props) => {
     return (
     
         <Select
+        variant='standard'
         value={filterProperty} 
         onChange={ (event) => {
-          setFilterProperty(event.target.value)
-
-        }  }   
+          setFilterProperty(event.target.value)}}   
          >
           <MenuItem value={'name'} > Campaign Name </MenuItem>
           <MenuItem value={'message'} > Message </MenuItem>
           <MenuItem value={'status'} >Status </MenuItem>
  
         </Select>
-        
-  
     )
  }
 
