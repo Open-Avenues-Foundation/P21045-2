@@ -3,12 +3,15 @@ import {Link} from 'react-router-dom'
 import {DataGrid} from '@mui/x-data-grid'
 import axios from 'axios'
 import Button from '@mui/material/Button'
+import CampaignSearchFilter from './CampaignSearchFilter'
 
 
 export default function DataTable() {
     const [campaigns, setCampaigns] = useState([])
     const [matchingCampaigns, setMatchingCampaigns] = useState([])
     const [campaignsNeedUpdate, setCampaignsNeedUpdate] = useState(false)
+    const [filterProperty,setFilterProperty] = useState('name')
+    const [searchTerm,setSearchTerm] = useState('')
 
     useEffect(() => {
 
@@ -20,13 +23,13 @@ export default function DataTable() {
         }))
     }, [campaignsNeedUpdate])
 
-    const filteredCampaigns = (userInput) => {
+  useEffect(() => {
         const matchingCampaigns = campaigns.filter(campaign => {
-            return campaign.name.toLowerCase().startsWith(userInput.toLowerCase())
+            return campaign[filterProperty].toLowerCase().includes(searchTerm.toLowerCase())
         })
 
         setMatchingCampaigns(matchingCampaigns)
-    }
+    },[searchTerm,filterProperty,campaigns])
 
     function sleeper(ms) {
         return function (x) {
@@ -71,9 +74,10 @@ export default function DataTable() {
 
     return (
         <div>
-            <input className="searchBox" type="text" name="search" placeholder='Search Campaigns...'
-                onChange={(event) => filteredCampaigns(event.target.value)}
-            />
+           <CampaignSearchFilter filterProperty={filterProperty} setFilterProperty={setFilterProperty}/> 
+                <input className="searchBox" type="text" name="search"  value= {searchTerm} placeholder='Search Campaign...'
+                    onChange={(event) => setSearchTerm(event.target.value)}
+                />{' '}
             <div style={{ height: 400, width: '100%' }}>
                 <DataGrid
                     rows={matchingCampaigns}    
