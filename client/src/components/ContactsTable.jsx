@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import Grid from '@mui/material/Grid'
 
 export default function ContactsTable(props) { 
   const {contacts,selectedContacts,setSelectedContacts} = props
@@ -29,7 +30,7 @@ console.log(selectedContacts)
   const rows = contacts
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <Grid style={{ height: 400, width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -39,7 +40,7 @@ console.log(selectedContacts)
         selectionModel={selectedIndex}
         onSelectionModelChange={(newSelectionModel) =>{setSelectedIndex(newSelectionModel)} } 
       />
-    </div>
+    </Grid>
   );
 }
 

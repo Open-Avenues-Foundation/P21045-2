@@ -48,7 +48,7 @@ const LandingPage = () => {
                 <Grid item md={1} lg={1} xl={1}> 
                     <ContactsSearchFilter filterProperty={filterProperty} setFilterProperty={setFilterProperty}/> 
                 </Grid>   
-                <Grid item md={5} lg={5} xl={5} right>
+                <Grid item md={5} lg={5} xl={5} sx={{display: 'flex', justifyContent: 'flex-end'}}>
                     <Link to={'/contact/upload'}><Button variant="text">Upload Contacts</Button></Link>
                     <Link to={'/campaign'}><Button variant="text">View Campaigns</Button></Link>
                 </Grid>

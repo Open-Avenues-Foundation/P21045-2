@@ -41,7 +41,7 @@ export default function DataTable() {
         const { params } = props
 
         const handleOnClick = async () => {
-            await axios.post(`http://localhost:1336/api/campaign/start/${params.row.id}`).then(sleeper(1000)).then((payload) => {
+            await axios.post(`http://localhost:1336/api/campaign/start/${params.row.id}`).then(sleeper(1500)).then((payload) => {
                 setCampaignsNeedUpdate(true)
             })
         }

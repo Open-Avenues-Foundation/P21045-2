@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
 import axios from 'axios'
 import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
 
-const CSVUpload = ({ resetForm }) => {
+const CSVUpload = ( ) => {
 
     const [files, setFiles] = useState([]);
     const inputRef = useRef(null);
@@ -31,21 +30,19 @@ const CSVUpload = ({ resetForm }) => {
         }
     }
     return(
-        <Container className="admin">
-            <Box className="admin__upload-file">
-            <form ref={formRef}>
-                <div className="mui--text-dark-secondary mui--text-button">{message}</div>
-                <div className="upload-box" onClick={handleClick}>
+        <Container>
+            <form ref={formRef}>    
+                <div>{message}</div>
+                <div onClick={handleClick}>
                     Click to Upload file (CSV) <hr />
                     {files[0] && files[0].name}
                 </div>
                 <input type="file" ref={inputRef} onChange={handleFiles} style={{ display: 'none' }} />
-                <Button className="mui-btn mui-btn--primary" onClick={handleSubmit}>Submit</Button>
+                <Button onClick={handleSubmit}>Submit</Button>
             </form>
                 <p>*File must have the following headers:</p>
                 <p>firstName, lastName, email, city, state, phoneNumber, lastOrderPrice, lastOrderDate</p>
                 <Link to={'/'}><Button variant="contained" >Back</Button></Link>
-            </Box>
         </Container>
     )
 }
