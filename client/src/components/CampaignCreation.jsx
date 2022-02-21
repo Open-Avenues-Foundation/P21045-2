@@ -31,6 +31,7 @@ const CampaignCreation = (props) => {
     if(contacts.length === 0){
       setContactsErrorText('*Please Select Contact(s)*')
       setContactsError(true)
+      return contactsErrorText
     }
 
     if(campaignName.length === 0 && campaignMessage.length === 0){
@@ -50,8 +51,6 @@ const CampaignCreation = (props) => {
       return setMessageError(true)
     }
 
-
-
     const newCampaign = await axios.post('http://localhost:1336/api/campaign/', {
       message: campaignMessage, name: campaignName
 
@@ -67,25 +66,23 @@ const CampaignCreation = (props) => {
   }
 
 return (
-<div>
-{contactsError ? 
-  <Alert severity="error">Please select Contacts above <strong>BEFORE</strong> creating a Campaign!</Alert>
-  : null
-}
-  <div className='Campaign-section'>
-    <Box sx={{ borderColor: 'grey.400' }} border={2} p={3} borderRadius={5} >
-      <FormGroup size='normal'>
-              <TextField id="Campaign Name" helperText={nameErrorText}  error={nameError} sx={{ mx: 'auto', }} label="Campaign Name" variant="outlined" 
-              onChange={(event) => setCampaignName(event.target.value)} value={campaignName} />
-            <Container maxWidth="sm">
-              <TextField fullWidth id="Campaign Message" helperText={messageErrorText} error={messageError} sx={{ mx: 'auto' }} margin="normal" label="Campaign Message" variant="outlined" multiline
-              onChange={(event) => setCampaignMessage(event.target.value)} value={campaignMessage} />
-            </Container>
-      </FormGroup>
-      <Button variant='contained' onClick={createCampaign}>Create Campaign</Button>
-    </Box>
-  </div>
-</div>
+      <Container>
+        {contactsError ? 
+          <Alert severity="error">Please select Contacts above <strong>BEFORE</strong> creating a Campaign!</Alert>
+          : null
+        }
+          <Box sx={{ borderColor: 'grey.400' }} border={2} m={2} p={3} borderRadius={5} >
+            <FormGroup size='normal'>
+                    <TextField id="Campaign Name" helperText={nameErrorText}  error={nameError} sx={{ mx: 'auto', }} label="Campaign Name" variant="outlined" 
+                    onChange={(event) => setCampaignName(event.target.value)} value={campaignName} />
+                  <Container maxWidth="sm">
+                    <TextField fullWidth id="Campaign Message" helperText={messageErrorText} error={messageError} sx={{ mx: 'auto' }} margin="normal" label="Campaign Message" variant="outlined" multiline
+                    onChange={(event) => setCampaignMessage(event.target.value)} value={campaignMessage} />
+                  </Container>
+            </FormGroup>
+            <Button variant='contained' onClick={createCampaign}>Create Campaign</Button>
+          </Box>
+      </Container>
 )
 }
 

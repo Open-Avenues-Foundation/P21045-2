@@ -16,14 +16,14 @@ console.log(selectedContacts)
 
  const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'email', headerName: 'Email', width: 300},
-    { field: 'firstName', headerName: 'First name', width: 200 },
-    { field: 'lastName', headerName: 'Last name', width: 200 },
-    { field: 'phoneNumber', headerName: 'Phone Number', width: 200 },
-    {field: 'city', headerName:'City', width:200},
+    { field: 'email', headerName: 'Email', width: 250},
+    { field: 'firstName', headerName: 'First name', width: 150 },
+    { field: 'lastName', headerName: 'Last name', width: 150 },
+    { field: 'phoneNumber', headerName: 'Phone Number', width: 150 },
+    { field: 'city', headerName: 'City', width: 150},
     { field: 'state', headerName: 'State', width: 70},
-    { field: 'lastOrderPrice', headerName: 'Last Order Price', width: 200 },
-    { field: 'lastOrderDate', headerName: 'Last Order Date', width: 200,}
+    { field: 'lastOrderPrice', headerName: 'Last Order Price', width: 150 },
+    { field: 'lastOrderDate', headerName: 'Last Order Date', width: 150,}
   ];
 
   const rows = contacts
