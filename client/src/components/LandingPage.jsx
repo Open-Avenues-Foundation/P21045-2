@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import ContactsTable from './ContactsTable'
 import CampaignCreation from "./CampaignCreation"; 
-import ContactsSearchFilter from './ContactsSearchFilter';
-import './LandingPage.css'
-
+import ContactsSearchFilter from './ContactsSearchFilter'
 
 const LandingPage = () => {
     const [contacts, setContacts] = useState([])
@@ -35,19 +34,27 @@ const LandingPage = () => {
 
 
     return (
-        <div> 
-            <div>
-                <ContactsSearchFilter className='filter' filterProperty={filterProperty} setFilterProperty={setFilterProperty}/> 
-                <input className="searchBox" type="text" name="search"  value= {searchTerm} placeholder='Search Contact...'
-                    onChange={(event) => setSearchTerm(event.target.value)}
-                />{' '}
-                <Link to={'/contact/upload'}><Button variant="outlined">Upload Contacts</Button></Link>{' '}
-                <Link to={'/campaign'}><Button variant="outlined">View Campaigns</Button></Link>
-            </div>
+        <Grid> 
+            <Grid
+                container
+                direction="row"
+                spacing={1}
+                padding={2}>
+                <Grid item md={6} sx={{justifyContect: "flex-start"}}>
+                    <input className="searchBox" type="text" name="search"  value= {searchTerm} placeholder='Search Contact...'
+                        onChange={(event) => setSearchTerm(event.target.value)}
+                    />{' '}            
+                    <ContactsSearchFilter filterProperty={filterProperty} setFilterProperty={setFilterProperty}/> 
+                </Grid>
+                <Grid item sx={{ justifyContect:"flex-end" }}>
+                    <Link to={'/contact/upload'}><Button variant="text">Upload Contacts</Button></Link>
+                    <Link to={'/campaign'}><Button variant="text">View Campaigns</Button></Link>
+                </Grid>
+            </Grid>
             <ContactsTable contacts={matchingContacts} selectedContacts={selectedContacts} setSelectedContacts={setSelectedContacts}/> 
             <CampaignCreation contacts={selectedContacts} />
 
-        </div>
+        </Grid>
     )
 }
 

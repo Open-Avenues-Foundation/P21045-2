@@ -48,7 +48,7 @@ export default function DataTable() {
         }
 
         return (
-            <Button onClick={handleOnClick}>Start</Button>
+            <Button variant="text" onClick={handleOnClick}>Start</Button>
         )
     }
 
@@ -60,12 +60,12 @@ export default function DataTable() {
             headerName: 'Message',
             description: 'This column is not sortable',
             sortable: false,
-            width: 300
+            width: 400
         },
         { field: 'timeInitiated', headerName: 'Executed Date', width: 200 },
         { field: 'status', headerName: 'Status', width: 130 },
         {
-            field: '', headerName: "Start", width: 135, renderCell: (params) => {
+            field: '', headerName: "Start", width: 135, sortable: false, renderCell: (params) => {
 
                 return <StartButton params={params} />
             }, disableClickEventBubbling: true
@@ -85,8 +85,12 @@ export default function DataTable() {
                     pageSize={5}
                     rowsPerPageOptions={[5]}
                 />
-                <Link to={'/'}><Button variant="outlined" >Back</Button></Link>
-            </div>
-        </div>
+            </Grid>
+            <Grid
+            container
+            >
+                <Link to={'/'}><Button variant="contained" >Back</Button></Link>
+            </Grid>
+        </Grid>
     );
 }

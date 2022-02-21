@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {MenuItem, Select} from '@mui/material';
-
 
 const ContactsSearchFilter = (props) => {
     const {filterProperty,setFilterProperty} = props
     return (
-        <Select
+        <Select 
+          variant= 'standard'
           value={filterProperty} 
           onChange={ (event) => {
             setFilterProperty(event.target.value)

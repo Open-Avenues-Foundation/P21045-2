@@ -21,7 +21,7 @@ console.log(selectedContacts)
     { field: 'lastName', headerName: 'Last name', width: 200 },
     { field: 'phoneNumber', headerName: 'Phone Number', width: 200 },
     {field: 'city', headerName:'City', width:200},
-    {field:'state', headerName:'State',width:130},
+    { field: 'state', headerName: 'State', width: 70},
     { field: 'lastOrderPrice', headerName: 'Last Order Price', width: 200 },
     { field: 'lastOrderDate', headerName: 'Last Order Date', width: 200,}
   ];

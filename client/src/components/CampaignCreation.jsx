@@ -73,7 +73,7 @@ return (
   : null
 }
   <div className='Campaign-section'>
-    <Box sx={{ borderColor: 'grey.400' }} border={2} p={3} m={0.2} borderRadius={5} >
+    <Box sx={{ borderColor: 'grey.400' }} border={2} p={3} borderRadius={5} >
       <FormGroup size='normal'>
               <TextField id="Campaign Name" helperText={nameErrorText}  error={nameError} sx={{ mx: 'auto', }} label="Campaign Name" variant="outlined" 
               onChange={(event) => setCampaignName(event.target.value)} value={campaignName} />
