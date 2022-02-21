@@ -7,49 +7,27 @@ import axios from 'axios'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert'
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid'
 
 const CampaignCreation = (props) => {
   const { contacts } = props
   const [campaignMessage, setCampaignMessage] = useState('')
   const [campaignName, setCampaignName] = useState('')
-  const [nameError, setNameError] = useState(false)
-  const [nameErrorText, setNameErrorText] = useState('Create A Name For Your Campaign')
-  const [messageError, setMessageError] = useState(false)
-  const [messageErrorText, setMessageErrorText] = useState('Create A Message For Your Campaign')
-  const [contactsError, setContactsError] = useState(false)
-  const [contactsErrorText, setContactsErrorText] = useState('Which Contacts Would You Like To Receive The Campaign?')
+  const [validationAlert, setValidationAlert] = useState(false)
+
 
   const navigate = useNavigate()
 
   const createCampaign = async () => {
-    setNameError(false)
-    setMessageError(false)
-    setContactsError(false)
-    setNameErrorText('Create A Name For Your Campaign')
-    setMessageErrorText('Create A Message For Your Campaign')
+    setValidationAlert(false)
 
-    if(contacts.length === 0){
-      setContactsErrorText('*Please Select Contact(s)*')
-      setContactsError(true)
-      return contactsErrorText
+
+    if(contacts.length === 0 || campaignName.length === 0 || campaignMessage.length === 0){
+
+      return setValidationAlert(true)
     }
 
-    if(campaignName.length === 0 && campaignMessage.length === 0){
-      setNameErrorText('*Please Enter A Campaign Name*')
-      setMessageErrorText('*Please Enter A Message*')
-      setMessageError(true)
-      return setNameError(true)
-    }
-
-    if(campaignName.length === 0){
-      setNameErrorText('*Please Enter A Campaign Name*')
-      return setNameError(true)
-    }
-
-    if(campaignMessage.length === 0){
-      setMessageErrorText('*Please Enter A Message*')
-      return setMessageError(true)
-    }
 
     const newCampaign = await axios.post('http://localhost:1336/api/campaign/', {
       message: campaignMessage, name: campaignName
@@ -66,23 +44,23 @@ const CampaignCreation = (props) => {
   }
 
 return (
-      <Container>
-        {contactsError ? 
-          <Alert severity="error">Please select Contacts above <strong>BEFORE</strong> creating a Campaign!</Alert>
+      <Grid>
+        {validationAlert ? 
+          <Alert severity="error">Select Contact(s) above, Create a Campaign Name, a Campaign Message <strong>BEFORE</strong> creating a Campaign!</Alert>
           : null
         }
           <Box sx={{ borderColor: 'grey.400' }} border={2} m={2} p={3} borderRadius={5} >
             <FormGroup size='normal'>
-                    <TextField id="Campaign Name" helperText={nameErrorText}  error={nameError} sx={{ mx: 'auto', }} label="Campaign Name" variant="outlined" 
+                    <TextField id="Campaign Name"   sx={{ mx: 'auto', }} label="Campaign Name" variant="outlined" 
                     onChange={(event) => setCampaignName(event.target.value)} value={campaignName} />
                   <Container maxWidth="sm">
-                    <TextField fullWidth id="Campaign Message" helperText={messageErrorText} error={messageError} sx={{ mx: 'auto' }} margin="normal" label="Campaign Message" variant="outlined" multiline
+                    <TextField fullWidth id="Campaign Message" sx={{ mx: 'auto' }} margin="normal" label="Campaign Message" variant="outlined" multiline
                     onChange={(event) => setCampaignMessage(event.target.value)} value={campaignMessage} />
                   </Container>
             </FormGroup>
             <Button variant='contained' onClick={createCampaign}>Create Campaign</Button>
           </Box>
-      </Container>
+      </Grid>
 )
 }
 
