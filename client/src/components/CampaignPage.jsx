@@ -10,7 +10,7 @@ export default function DataTable() {
     const [campaigns, setCampaigns] = useState([])
     const [matchingCampaigns, setMatchingCampaigns] = useState([])
     const [campaignsNeedUpdate, setCampaignsNeedUpdate] = useState(false)
-    const [filterProperty,setFilterProperty] = useState('campaignName')
+    const [filterProperty,setFilterProperty] = useState('name')
     const [searchTerm,setSearchTerm] = useState('')
 
     useEffect(() => {

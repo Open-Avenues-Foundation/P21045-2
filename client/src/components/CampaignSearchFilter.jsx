@@ -13,10 +13,9 @@ const CampaignSearchFilter = (props) => {
 
         }  }   
          >
-          <MenuItem value={'campaignName'} >  First Name </MenuItem>
-          <MenuItem value={'message'} > Last Name </MenuItem>
-          <MenuItem value={'timeInitiated'} > Email </MenuItem>
-          <MenuItem value={'status'} > Phone Number </MenuItem>
+          <MenuItem value={'name'} > Campaign Name </MenuItem>
+          <MenuItem value={'message'} > Message </MenuItem>
+          <MenuItem value={'status'} >Status </MenuItem>
  
         </Select>
         
