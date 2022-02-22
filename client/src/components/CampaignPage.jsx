@@ -78,12 +78,14 @@ export default function DataTable() {
                     <CampaignSearchFilter filterProperty={filterProperty} setFilterProperty={setFilterProperty}/> 
                 </Grid>
             </Grid>
-            <Grid style={{ height: 400, width: '100%' }}>
+            <Grid style={{ height: 786, width: '100%' }}
+                  paddingLeft={5}
+                  paddingRight={5}>
                 <DataGrid
                     rows={matchingCampaigns}    
                     columns={columns}
-                    pageSize={5}
-                    rowsPerPageOptions={[5]}/>
+                    pageSize={13}
+                    rowsPerPageOptions={[13]}/>
             </Grid>
             <Grid
             padding={2}>

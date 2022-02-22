@@ -34,7 +34,10 @@ console.log(selectedContacts)
   return (
       <Box sx={{
         height: 530,
-        width: '100%'}} >
+        width: '100%'}}
+        paddingLeft={5}
+        paddingRight={5}
+        >
         <DataGrid
           rows={rows}
           columns={columns}

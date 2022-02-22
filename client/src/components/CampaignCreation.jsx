@@ -48,7 +48,7 @@ return (
           <Alert severity="error">Select Contact(s) above, Create a Campaign Name, a Campaign Message <strong>BEFORE</strong> creating a Campaign!</Alert>
           : null
         }
-          <Box sx={{ borderColor: 'grey.400' }} border={2} m={2} p={3} borderRadius={5} >
+          <Box sx={{ borderColor: 'grey.300' }} border={1.5} m={.5} mx={5} p={3} borderRadius={1} >
             <FormGroup size='normal'>
                     <TextField id="Campaign Name"   sx={{ mx: 'auto', }} label="Campaign Name" variant="outlined" 
                     onChange={(event) => setCampaignName(event.target.value)} value={campaignName} />
