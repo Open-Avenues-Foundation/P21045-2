@@ -86,7 +86,6 @@ export default function DataTable() {
                     rowsPerPageOptions={[5]}/>
             </Grid>
             <Grid
-            spacing={1}
             padding={2}>
                 <Link to={'/'}><Button variant="contained" >Back</Button></Link>
             </Grid>
