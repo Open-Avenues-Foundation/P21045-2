@@ -33,10 +33,9 @@ const CampaignCreation = (props) => {
 
     })
     contacts.forEach( async(contact) => {
-      const newTextMessage = await axios.post('http://localhost:1336/api/text', {
+        await axios.post('http://localhost:1336/api/text', {
         contactId: contact.id, textCampaignId: newCampaign.data.id
       })
-      console.log(newTextMessage)
     })
     navigate('/campaign')
 
