@@ -39,7 +39,6 @@ export default function DataTable() {
 
     const StartButton = (props) => {
         const { params } = props
-        console.log(params)
         const handleOnClick = async () => {
             await axios.post(`/api/campaign/start/${params.row.id}`).then(sleeper(1500)).then((payload) => {
                 setCampaignsNeedUpdate(true)
