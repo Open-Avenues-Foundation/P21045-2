@@ -7,6 +7,8 @@ import ContactsTable from './ContactsTable'
 import CampaignCreation from "./CampaignCreation"; 
 import ContactsSearchFilter from './ContactsSearchFilter'
 import Input from '@mui/material/Input'
+import SearchIcon from '@mui/icons-material/Search';
+
 
 
 const LandingPage = () => {
@@ -41,16 +43,17 @@ const LandingPage = () => {
                 direction="row"
                 spacing={1}
                 padding={2}
-                paddingTop={4}>
+                paddingTop={4}> 
+                <SearchIcon /> 
                 <Grid item md={6} lg={6} xl={6}>
-                    <Input fullWidth className="searchBox" type="text" name="search"  value= {searchTerm} placeholder='Search Contact...'
-                        onChange={(event) => setSearchTerm(event.target.value)}/>    
-                </Grid>   
+                <Input fullWidth className="searchBox" type="text"  name="search"  value= {searchTerm} placeholder='Search Contact...'
+                        onChange={(event) => setSearchTerm(event.target.value)}/>  
+               </Grid>   
                 <Grid item md={1} lg={1} xl={1}> 
                     <ContactsSearchFilter filterProperty={filterProperty} setFilterProperty={setFilterProperty}/> 
                 </Grid>   
                 <Grid item md={5} lg={5} xl={5} sx={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <Link to={'/contact/upload'}><Button variant="text">Upload Contacts</Button></Link>
+                    <Link to={'/contact/upload'}><Button variant="text" >Upload Contacts </Button></Link> 
                     <Link to={'/campaign'}><Button variant="text">View Campaigns</Button></Link>
                 </Grid>
             </Grid>
