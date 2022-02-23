@@ -13,7 +13,7 @@
         "lint:fix": "./node_modules/.bin/eslint --fix --format codeframe .",
         "dev:client:test": "cd client && npm run test",
         "dev:server:test": "./node_modules/.bin/env-cmd ./node_modules/.bin/mocha tests/**/*.test.js",
-        "prod:migrate": "sequelize db:migrate --env production --config ./config/sequelize.js",
+        "prod:migrate": "sequelize db:migrate --env development --config ./config/sequelize.js",
         "build": "npm run prod:migrate && cd client && npm install && npm run build",
         "start": "node index.js"
     },
