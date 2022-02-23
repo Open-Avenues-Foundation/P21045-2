@@ -20,11 +20,9 @@ const getContactById = async (request, response) => {
   try {
     const { id } = request.params
 
-    const getContactById = await models.Contacts.findAll({
-      where: {
-        [models.Op.or]: [{ firstName: { [models.Op.like]: `${id}%` } }, { id }]
-      }
-    })
+    const getContactById = await models.Contacts.findOne({
+      where: { id },
+    include: [{model: models.TextCampaigns}]})
 
     if (getContactById.length === 0) return response.status(404).send('No contact found, please try again')
 

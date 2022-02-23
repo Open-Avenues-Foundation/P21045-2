@@ -39,7 +39,7 @@ export default function DataTable() {
 
     const StartButton = (props) => {
         const { params } = props
-
+        console.log(params)
         const handleOnClick = async () => {
             await axios.post(`http://localhost:1336/api/campaign/start/${params.row.id}`).then(sleeper(1500)).then((payload) => {
                 setCampaignsNeedUpdate(true)
@@ -51,7 +51,7 @@ export default function DataTable() {
     }
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'id', headerName: '#', width: 70 },
         { field: 'name', headerName: 'Campaign Name', width: 200 },
         { field: 'message', headerName: 'Message', description: 'This column is not sortable', sortable: false, width: 400 },
         { field: 'timeInitiated', headerName: 'Executed Date', width: 200 },
