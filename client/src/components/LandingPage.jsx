@@ -7,9 +7,6 @@ import ContactsTable from './ContactsTable'
 import CampaignCreation from "./CampaignCreation"; 
 import ContactsSearchFilter from './ContactsSearchFilter'
 import Input from '@mui/material/Input'
-import SearchIcon from '@mui/icons-material/Search';
-
-
 
 const LandingPage = () => {
     const [contacts, setContacts] = useState([])
