@@ -28,12 +28,12 @@ const CampaignCreation = (props) => {
     }
 
 
-    const newCampaign = await axios.post('http://localhost:1336/api/campaign/', {
+    const newCampaign = await axios.post('/api/campaign/', {
       message: campaignMessage, name: campaignName
 
     })
     contacts.forEach( async(contact) => {
-      const newTextMessage = await axios.post('http://localhost:1336/api/text', {
+      const newTextMessage = await axios.post('/api/text', {
         contactId: contact.id, textCampaignId: newCampaign.data.id
       })
       console.log(newTextMessage)
