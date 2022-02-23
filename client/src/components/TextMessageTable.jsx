@@ -19,7 +19,6 @@ export default function TextMessageTable(props) {
         const handleOnClick = async () => {
             await axios.post('http://localhost:1336/api/text/twilio', {id: `${params.row.textId}`}).then(sleeper(1500)).finally(() => {
                setTextNeedsUpdate(true)
-               console.log('test')
             })
         }
         return (

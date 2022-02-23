@@ -53,7 +53,7 @@ const LandingPage = () => {
                     <Link to={'/campaign'}><Button variant="text">View Campaigns</Button></Link>
                 </Grid>
             </Grid>
-                <ContactsTable contacts={matchingContacts} selectedContacts={selectedContacts} setSelectedContacts={setSelectedContacts}/> 
+                <ContactsTable contacts={matchingContacts} setSelectedContacts={setSelectedContacts}/> 
                 <CampaignCreation contacts={selectedContacts} />
         </Grid>
     )

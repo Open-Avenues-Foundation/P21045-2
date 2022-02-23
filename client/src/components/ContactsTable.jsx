@@ -5,13 +5,9 @@ import { Link } from 'react-router-dom';
 
 
 export default function ContactsTable(props) { 
-  const {contacts,selectedContacts,setSelectedContacts} = props
+  const {contacts,setSelectedContacts} = props
   const [selectedIndex,setSelectedIndex] = useState([])
 
-  useEffect(() => {
-console.log(selectedContacts)
-  },[selectedContacts])
-  
   useEffect(()=> {
     setSelectedContacts(contacts.filter((_,index) =>{
       return  selectedIndex.includes(index+1)}))
