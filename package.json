@@ -12,7 +12,10 @@
         "lint": "./node_modules/.bin/eslint --format codeframe .",
         "lint:fix": "./node_modules/.bin/eslint --fix --format codeframe .",
         "dev:client:test": "cd client && npm run test",
-        "dev:server:test": "./node_modules/.bin/env-cmd ./node_modules/.bin/mocha tests/**/*.test.js"
+        "dev:server:test": "./node_modules/.bin/env-cmd ./node_modules/.bin/mocha tests/**/*.test.js",
+        "prod:migrate": "sequelize db:migrate --env production --config ./config/sequelize.js",
+        "build": "npm run prod:migrate && cd client && npm install && npm run build",
+        "start": "node index.js"
     },
     "repository": {
         "type": "git",
@@ -27,8 +30,8 @@
     "dependencies": {
         "@emotion/react": "^11.7.1",
         "@emotion/styled": "^11.6.0",
-        "@mui/icons-material": "^5.4.2",
         "@mui/material": "^5.4.1",
+        "@mui/icons-material": "^5.4.1",
         "body-parser": "^1.19.1",
         "bootstrap": "^5.1.3",
         "cors": "^2.8.5",

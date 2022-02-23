@@ -28,7 +28,7 @@ const CampaignCreation = (props) => {
     }
 
 
-    const newCampaign = await axios.post('http://localhost:1336/api/campaign/', {
+  const newCampaign = await axios.post('http://localhost:1336/api/campaign/', {
       message: campaignMessage, name: campaignName
 
     })

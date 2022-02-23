@@ -20,7 +20,7 @@ const CSVUpload = ( ) => {
         if (files.length > 0) {
             const formData = new FormData();
             formData.append('file_uploaded', files[0]);
-            axios.post('http://localhost:1336/api/contact/upload', formData)
+            axios.post('/api/contact/upload', formData)
                 .then(data => setMessage(data.data))
                 .catch((error) => setMessage('Unable to upload file. Please check formating'));
             setFiles([]);

@@ -16,7 +16,7 @@ export default function DataTable() {
     const [searchTerm,setSearchTerm] = useState('')
 
     useEffect(() => {
-        axios.get('http://localhost:1336/api/campaign').then((payload => {
+        axios.get('/api/campaign').then((payload => {
             const { data } = payload
             setCampaigns(data) 
             setMatchingCampaigns(data)
@@ -41,7 +41,7 @@ export default function DataTable() {
         const { params } = props
         console.log(params)
         const handleOnClick = async () => {
-            await axios.post(`http://localhost:1336/api/campaign/start/${params.row.id}`).then(sleeper(1500)).then((payload) => {
+            await axios.post(`/api/campaign/start/${params.row.id}`).then(sleeper(1500)).then((payload) => {
                 setCampaignsNeedUpdate(true)
             })
         }

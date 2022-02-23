@@ -16,7 +16,7 @@ const LandingPage = () => {
     const [searchTerm, setSearchTerm] = useState ('')
 
     useEffect(() => {
-        axios.get('http://localhost:1336/api/contact').then((payload) => {
+        axios.get('/api/contact').then((payload) => {
             const { data } = payload
             setContacts(data)
             setMatchingContacts(data)
