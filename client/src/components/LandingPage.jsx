@@ -43,8 +43,7 @@ const LandingPage = () => {
                 direction="row"
                 spacing={1}
                 padding={2}
-                paddingTop={4}> 
-                <SearchIcon /> 
+                paddingTop={4}>
                 <Grid item md={6} lg={6} xl={6}>
                 <Input fullWidth className="searchBox" type="text"  name="search"  value= {searchTerm} placeholder='Search Contact...'
                         onChange={(event) => setSearchTerm(event.target.value)}/>  
