@@ -17,7 +17,7 @@ const IndvContact = () => {
 
     useEffect(() => {
         const getContact = async () => {
-            const { data } = await axios.get(`http://localhost:1336/api/contact/${id}`)
+            const { data } = await axios.get(`/api/contact/${id}`)
             setContact(data)
             setTextMessages(data.textCampaigns)
             setTextNeedsUpdate(false)
