@@ -21,6 +21,6 @@ app.use('/api/campaign', textCampaignRouter)
 
 app.all('*', (request, response) => response.sendFile(path.resolve(__dirname, 'client/build', 'index.html')))
 
-app.listen(1337, () => {
-  console.log('Listening on port 1337...') // eslint-disable-line no-console
+app.listen(process.env.PORT || 3001, '0.0.0.0', () => {
+  console.log('Server is running on port 3001')
 })
