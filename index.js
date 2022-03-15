@@ -5,7 +5,7 @@ const contactsRouter = require('./routes/contactsRoutes')
 const textMessageRouter = require('./routes/textMessageRoutes')
 const textCampaignRouter = require('./routes/textCampaignRoutes')
 const cors = require('cors')
-const PORT = process.env.PORT || 3000
+// const PORT = process.env.PORT || 3000
 
 const app = express()
 
@@ -21,6 +21,6 @@ app.use('/api/campaign', textCampaignRouter)
 
 app.all('*', (request, response) => response.sendFile(path.resolve(__dirname, 'client/build', 'index.html')))
 
-app.listen(PORT, () => {
-  console.log(`Our app is running on port ${ PORT }`)
+app.listen(1337, () => {
+  console.log('Listening on port 1337...') // eslint-disable-line no-console
 })
